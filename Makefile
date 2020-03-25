@@ -1,7 +1,7 @@
 ## TODO : can't order files alphabetically without breaking tuto 7->14
-CXBIN = ~/go/bin/cx
 SKYCOIN = /home/marcus/go/src/github.com/SkycoinProject
 GOPATH = ~/go
+CXBIN = $(GOPATH)/bin/cx
 CX = $(SKYCOIN)/cx
 CXFX =$(GOPATH)/src/github.com/SkycoinProject/cxfx
 FLAGS = --debug-profile=100 -cxpath ./

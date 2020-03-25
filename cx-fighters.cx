@@ -15,8 +15,6 @@ import "v4"
 // Globals ...
 var mesh gfx.MeshId
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 func gameOnEvent(controlIndex i32, controlAction i32) {
 	var key i32 = gui.CurrentEvent.keyboard.key
 	var action i32 = gui.CurrentEvent.keyboard.action
@@ -28,8 +26,6 @@ func gameOnEvent(controlIndex i32, controlAction i32) {
 	}
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 func gameOnUpdate(controlIndex i32, controlAction i32) {
 	var w f32 = 200.0
 	var h f32 = 200.0
@@ -46,28 +42,29 @@ func gameOnUpdate(controlIndex i32, controlAction i32) {
 	gfx.MeshEnd(mesh)
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 func gameOnRender(controlIndex i32, controlAction i32) {
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 	gfx.MeshRender(mesh)
 }
 
 func main(){
+    // non-working commented code below - offender is gam.Init
     // init
-	//gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
-	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+	//gam.Init("CX-Fighter", 300, 300, 30, "/home/marcus/go/src/github.com/SkycoinProject/cxfx/resources/")
+	//var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
-	/*var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
-	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
-	gui.ScreenSetDuration(gameScreen, -1.0D)
-	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
-	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
-	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")*/
+	// var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
+	// gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
+	// gui.ScreenSetDuration(gameScreen, -1.0D)
+	// gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
+	// gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
+	// gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")*/
+	
 
 	// run
 	//gui.ScreenShow(gameScreen)
+	
 	//gam.Run(2U)
 
 	// destroy
@@ -78,6 +75,5 @@ func main(){
 	menus.displayMainMenu()  				//run test function from module "menus.cx"
 	str.print("Hello World, Let's Fight")   //print hello world for game program
 	combat.punch()							//get 'em
-	
 
 }
