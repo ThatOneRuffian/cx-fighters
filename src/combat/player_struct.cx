@@ -1,0 +1,5 @@
+package combat
+
+func punch(){
+	str.print("Punched")  //print test string to ensure that function is linked to main
+}
