@@ -1,0 +1,20 @@
+package main
+
+//cx-fighters libs
+import "combat"
+import "menus"
+
+//CXFX libs
+import "app"
+import "gam"
+import "gui"
+import "mat"
+import "v4"
+
+func main(){
+	menus.displayMainMenu()  				//run test function from module "menus.cx"
+	str.print("Hello World, Let's Fight")   //print hello world for game program
+	combat.punch()							//get 'em
+	
+
+}

@@ -1,2 +1,2 @@
 # cx-fighters
-A 2d fighter game written in CX programming language
+A 2D fighting game written in CX programming language
