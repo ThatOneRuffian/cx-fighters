@@ -1,7 +1,7 @@
 ## TODO : can't order files alphabetically without breaking tuto 7->14
 CXBIN = ~/go/bin/cx
 SKYCOIN = /home/marcus/go/src/github.com/SkycoinProject
-GOPATH = ~/go/
+GOPATH = ~/go
 CX = $(SKYCOIN)/cx
 CXFX =$(GOPATH)/src/github.com/SkycoinProject/cxfx
 FLAGS = --debug-profile=100 -cxpath ./
@@ -65,4 +65,4 @@ SRC =     $(CX)/lib/args.cx\
 	  $(CXFX)/src/gam/game.cx
 
 cx-fighters:
-	$(CXBIN) $(OPTS) $(SRC) ./cx-fighters.cx ++data=$(DATA) 
+	$(CXBIN) $(OPTS) $(SRC) cx-fighters.cx ++data=$(DATA) 
