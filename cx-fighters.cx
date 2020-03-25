@@ -48,28 +48,25 @@ func gameOnRender(controlIndex i32, controlAction i32) {
 }
 
 func main(){
-    // non-working commented code below - offender is gam.Init
     // init
-	//gam.Init("CX-Fighter", 300, 300, 30, "/home/marcus/go/src/github.com/SkycoinProject/cxfx/resources/")
-	//var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
+	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
-	// var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
-	// gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
-	// gui.ScreenSetDuration(gameScreen, -1.0D)
-	// gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
-	// gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
-	// gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")*/
-	
+	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
+	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
+	gui.ScreenSetDuration(gameScreen, -1.0D)
+	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
+	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
+	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
 
 	// run
-	//gui.ScreenShow(gameScreen)
-	
-	//gam.Run(2U)
+	gui.ScreenShow(gameScreen)
+	gam.Run(2U)
 
 	// destroy
-	//gfx.MeshUnlock(mesh)
-	//gam.Destroy()
+	gfx.MeshUnlock(mesh)
+	gam.Destroy()
 
 	//Game Logic
 	menus.displayMainMenu()  				//run test function from module "menus.cx"

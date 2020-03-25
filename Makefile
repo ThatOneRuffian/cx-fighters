@@ -1,15 +1,15 @@
 ## TODO : can't order files alphabetically without breaking tuto 7->14
-SKYCOIN = /home/marcus/go/src/github.com/SkycoinProject
 GOPATH = ~/go
 CXBIN = $(GOPATH)/bin/cx
+SKYCOIN = $(GOPATH)/src/github.com/SkycoinProject
 CX = $(SKYCOIN)/cx
-CXFX =$(GOPATH)/src/github.com/SkycoinProject/cxfx
-FLAGS = --debug-profile=100 -cxpath ./
-OPTS = $(FLAGS)
+CXFX = ../..
+PPROF = --debug-profile=100 -cxpath ./
+OPTS = $(PPROF)
 OPTS_MEM = $(OPTS) --stack-size=128M --heap-initial=800M -heap-max=800M
 
 DATA = $(CXFX)/resources/
-SRC =     $(CX)/lib/args.cx\
+SRC = $(CX)/lib/args.cx\
 	  $(CX)/lib/json.cx\
 	  $(CXFX)/src/mat/math.cx\
 	  $(CXFX)/src/mat/v1d.cx\
@@ -63,6 +63,5 @@ SRC =     $(CX)/lib/args.cx\
 	  $(CXFX)/src/snd/voice.cx\
 	  $(CXFX)/src/gam/camera.cx\
 	  $(CXFX)/src/gam/game.cx
-
-cx-fighters:
+cx-fighter:
 	$(CXBIN) $(OPTS) $(SRC) cx-fighters.cx ++data=$(DATA) 
