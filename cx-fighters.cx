@@ -1,19 +1,56 @@
 package main
 
-//cx-fighters libs
-import "combat"
-import "menus"
+// cx-fighters libs
+import "combat" //combat functions - subject to change
+import "menus"  //in-game menus
 
-//CXFX libs
+// CXFX window libs
 import "app"
 import "gam"
-import "gfx"
+import "gfx"    // meshes, textures, rendering
 import "gui"
 import "mat"
 import "v4"
 
-// Globals ...
+// Window Globals
 var mesh gfx.MeshId
+
+func main(){
+	renderWindow()
+
+	// Game Logic
+	menus.displayMainMenu()  				//run test function from module "menus.cx"
+	str.print("Hello World, Let's Fight")   //print hello world for game program
+	combat.punch()							//get 'em
+}
+
+
+
+
+//=============== Window Functions ============
+// These functions could not be decoupled easily from the main file
+
+func renderWindow(){
+	 // init
+	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
+	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+
+	// gameScreen
+	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
+	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
+	gui.ScreenSetDuration(gameScreen, -1.0D)
+	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
+	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
+	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
+
+	// run
+	gui.ScreenShow(gameScreen)
+	gam.Run(2U)
+
+	// destroy
+	gfx.MeshUnlock(mesh)
+	gam.Destroy()
+}
 
 func gameOnEvent(controlIndex i32, controlAction i32) {
 	var key i32 = gui.CurrentEvent.keyboard.key
@@ -45,32 +82,4 @@ func gameOnUpdate(controlIndex i32, controlAction i32) {
 func gameOnRender(controlIndex i32, controlAction i32) {
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 	gfx.MeshRender(mesh)
-}
-
-func main(){
-    // init
-	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
-	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
-
-	// gameScreen
-	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
-	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
-	gui.ScreenSetDuration(gameScreen, -1.0D)
-	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
-	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
-	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
-
-	// run
-	gui.ScreenShow(gameScreen)
-	gam.Run(2U)
-
-	// destroy
-	gfx.MeshUnlock(mesh)
-	gam.Destroy()
-
-	//Game Logic
-	menus.displayMainMenu()  				//run test function from module "menus.cx"
-	str.print("Hello World, Let's Fight")   //print hello world for game program
-	combat.punch()							//get 'em
-
 }
