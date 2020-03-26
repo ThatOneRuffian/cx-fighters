@@ -8,7 +8,7 @@ import "menus"  //in-game menus
 import "app"
 import "gam"
 import "gfx"    // meshes, textures, rendering
-import "gui"
+import "gui"    // window functions
 import "mat"
 import "v4"
 
@@ -16,23 +16,17 @@ import "v4"
 var mesh gfx.MeshId
 
 func main(){
-	renderWindow()
-
-	// Game Logic
-	menus.displayMainMenu()  				//run test function from module "menus.cx"
-	str.print("Hello World, Let's Fight")   //print hello world for game program
-	combat.punch()							//get 'em
+	startWindow() // start window loop
 }
 
 
 
 
-//=============== Window Functions ============
-// These functions could not be decoupled easily from the main file
+//=============== Event Handlers ============
 
-func renderWindow(){
+func startWindow(){   //
 	 // init
-	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
+	gam.Init("CX-Fighters", 1000, 600, 60, "")
 	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
@@ -52,24 +46,25 @@ func renderWindow(){
 	gam.Destroy()
 }
 
-func gameOnEvent(controlIndex i32, controlAction i32) {
+func gameOnEvent(controlIndex i32, controlAction i32) { // input handler - runs on mouse or keyboard input
 	var key i32 = gui.CurrentEvent.keyboard.key
 	var action i32 = gui.CurrentEvent.keyboard.action
 	var mods i32 = gui.CurrentEvent.keyboard.mods
-	if mods == app.MOD_NONE {
+	if mods == app.MOD_NONE {  				// key mapping
 		if key == app.KEYCODE_ESCAPE && action == app.KEY_PRESS {
 			app.Exit()
 		}
 	}
 }
 
-func gameOnUpdate(controlIndex i32, controlAction i32) {
+func gameOnUpdate(controlIndex i32, controlAction i32) {   // on update tick (based on fps?) run these lines of code
 	var w f32 = 200.0
 	var h f32 = 200.0
+	var mesh gfx.MeshId
 	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
 	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
 
-	gfx.MeshBegin(mesh)
+	gfx.MeshBegin(mesh)      // render green square
 	gfx.MeshAppendOrthoQuad(mesh,
 			v4.make(x, y, w, h),
 			v4.BLUE,
@@ -77,9 +72,13 @@ func gameOnUpdate(controlIndex i32, controlAction i32) {
 			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
 			0.0)
 	gfx.MeshEnd(mesh)
+
+	str.print("Hello world, let's fight!") // game code will eventually go in this loop somewhere
+	combat.punch()
 }
 
-func gameOnRender(controlIndex i32, controlAction i32) {
+func gameOnRender(controlIndex i32, controlAction i32) {   // also updates on every tick(?) - for updating screen graphics
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 	gfx.MeshRender(mesh)
+
 }
