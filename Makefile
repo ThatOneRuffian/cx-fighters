@@ -9,7 +9,8 @@ OPTS = $(PPROF)
 OPTS_MEM = $(OPTS) --stack-size=128M --heap-initial=800M -heap-max=800M
 
 DATA = $(CXFX)/resources/
-SRC = $(CX)/lib/args.cx\
+SRC = 	  ./src/* \
+	  $(CX)/lib/args.cx\
 	  $(CX)/lib/json.cx\
 	  $(CXFX)/src/mat/math.cx\
 	  $(CXFX)/src/mat/v1d.cx\

@@ -3,6 +3,7 @@ package main
 //cx-fighters libs
 import "combat"
 import "menus"
+import "window"
 
 //CXFX libs
 import "app"
@@ -16,14 +17,8 @@ import "v4"
 var mesh gfx.MeshId
 
 func gameOnEvent(controlIndex i32, controlAction i32) {
-	var key i32 = gui.CurrentEvent.keyboard.key
-	var action i32 = gui.CurrentEvent.keyboard.action
-	var mods i32 = gui.CurrentEvent.keyboard.mods
-	if mods == app.MOD_NONE {
-		if key == app.KEYCODE_ESCAPE && action == app.KEY_PRESS {
-			app.Exit()
-		}
-	}
+
+	window.inputHandler()
 }
 
 func gameOnUpdate(controlIndex i32, controlAction i32) {
