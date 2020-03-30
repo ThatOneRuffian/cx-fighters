@@ -25,19 +25,7 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 }
 
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
-	var w f32 = 200.0
-	var h f32 = 200.0
-	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
-	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
-
-	/*gfx.MeshBegin(mesh)
-	gfx.MeshAppendOrthoQuad(mesh,
-			v4.make(x, y, w, h),
-			v4.BLUE,
-			v4.GREEN,
-			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
-			0.0)
-	gfx.MeshEnd(mesh)*/
+	gameWindow.RenderMeshes()
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
