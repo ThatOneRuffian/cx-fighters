@@ -5,23 +5,21 @@ import "gfx"
 import "gui"
 import "player"
 
-
-func Begin(p *Player){
+func Begin(pl *Player){
 	// player init
 	
-	//p.PlayerInit(100, 32, "Animal")   // update player 
+	pl.PlayerInit(100, 32, "Animal") // update player 
 
-	//p1.print()							// print player states
-	/*p1.TakeDamage(34)					// apply damage
-	p1.print()
-	p1.TakeDamage(76)
+	pl.print()						// print player states
+	pl.TakeDamage(34)				// apply damage
+	pl.print()
+	pl.TakeDamage(76)
 	
-	i32.print(p1.health)				// print just player health*/
+	//i32.print(p.health)			// WIP - print player health
     
-	
     // init
 	gam.Init("CX-Fighters", 800, 600, 60, "")
-	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+	//pl.mesh = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
 	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
@@ -36,22 +34,16 @@ func Begin(p *Player){
 	gam.Run(2U)
 
 	// destroy
-	gfx.MeshUnlock(mesh)
+	gfx.MeshUnlock(pl.mesh)
 	gam.Destroy()
 }
 
-func RenderMeshes(){
+func RenderMeshes(pl *Player){
 		var w f32 = 200.0
 		var h f32 = 200.0
 		var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
 		var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
 
-		/*gfx.MeshBegin(mesh)
-		gfx.MeshAppendOrthoQuad(mesh,
-				v4.make(x, y, w, h),
-				v4.BLUE,
-				v4.GREEN,
-				v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
-				0.0)
-		gfx.MeshEnd(mesh)*/
+		gfx.MeshBegin(pl.mesh)
+	
 }

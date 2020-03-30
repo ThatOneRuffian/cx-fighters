@@ -15,20 +15,20 @@ type Loc struct{   // player location
 	y i32
 }
 
-func (p *Player) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
-	p.health = _health
-	p.speed = _speed
-	p.name = _name
+func (pl **Player) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
+	pl.health = _health
+	pl.speed = _speed
+	pl.name = _name
 }
 
-func (p *Player) print(){  // wrapper for printing player's details 
-	str.print(p.name)
-	i32.print(p.speed)
-	i32.print(p.health)
-	i32.print(p.loc.x)
-	i32.print(p.loc.y)
+func (pl **Player) print(){  // wrapper for printing player's details 
+	str.print(pl.name)
+	i32.print(pl.speed)
+	i32.print(pl.health)
+	i32.print(pl.loc.x)
+	i32.print(pl.loc.y)
 }
 
-func (p *Player) TakeDamage(damage i32){
-	p.health = p.health - damage         // Take damage
+func (pl **Player) TakeDamage(damage i32){
+	pl.health = pl.health - damage         // Take damage
 }

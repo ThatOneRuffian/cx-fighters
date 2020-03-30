@@ -15,9 +15,12 @@ import "v4"
 
 var player1 Player 					    // create new player struct
 
-
 func main(){
 	gameWindow.Begin(&player1) // start window loop
+}
+
+func (pl **Player) GetHealth() (hp i32){  // setup player attributes 
+	hp = pl.health
 }
 
 
@@ -28,10 +31,11 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 }
 
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
-	gameWindow.RenderMeshes()
+	gameWindow.RenderMeshes(&player1)
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
-	//gfx.MeshRender(mesh)
+
+	//gfx.MeshRender(player1.mesh)
 }
