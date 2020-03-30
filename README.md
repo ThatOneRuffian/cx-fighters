@@ -8,7 +8,7 @@ CX Repo: https://github.com/SkycoinProject/cx
 
 CXFX Repo: https://github.com/SkycoinProject/cxfx
 
-# Installing the Game
+# Running the Game
 cd ~/go/src/github.com/SykcoinProject/cxfx/tutorials
 
 git clone https://www.github.com/ThatOneRuffian/cx-fighters
