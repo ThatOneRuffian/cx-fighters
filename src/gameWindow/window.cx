@@ -6,38 +6,21 @@ import "gui"
 import "player"
 
 
-func RenderMeshes(){
-		var w f32 = 200.0
-		var h f32 = 200.0
-		var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
-		var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
-
-		/*gfx.MeshBegin(mesh)
-		gfx.MeshAppendOrthoQuad(mesh,
-				v4.make(x, y, w, h),
-				v4.BLUE,
-				v4.GREEN,
-				v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
-				0.0)
-		gfx.MeshEnd(mesh)*/
-}
-
-func Begin(){
+func Begin(p *Player){
 	// player init
-	var player1 Player 					    // create new player struct
-
-	player1.PlayerInit(100, 32, "Animal")   // update player 
-
-	player1.print()							// print player states
-	player1.TakeDamage(34)					// apply damage
-	player1.print()
-	player1.TakeDamage(76)
 	
-	i32.print(player1.health)				// print just player health
+	//p.PlayerInit(100, 32, "Animal")   // update player 
 
+	//p1.print()							// print player states
+	/*p1.TakeDamage(34)					// apply damage
+	p1.print()
+	p1.TakeDamage(76)
+	
+	i32.print(p1.health)				// print just player health*/
+    
 	
     // init
-	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
+	gam.Init("CX-Fighters", 800, 600, 60, "")
 	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
@@ -55,4 +38,20 @@ func Begin(){
 	// destroy
 	gfx.MeshUnlock(mesh)
 	gam.Destroy()
+}
+
+func RenderMeshes(){
+		var w f32 = 200.0
+		var h f32 = 200.0
+		var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
+		var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
+
+		/*gfx.MeshBegin(mesh)
+		gfx.MeshAppendOrthoQuad(mesh,
+				v4.make(x, y, w, h),
+				v4.BLUE,
+				v4.GREEN,
+				v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
+				0.0)
+		gfx.MeshEnd(mesh)*/
 }

@@ -13,8 +13,11 @@ import "gui"
 import "mat"
 import "v4"
 
+var player1 Player 					    // create new player struct
+
+
 func main(){
-	gameWindow.Begin() // start window loop
+	gameWindow.Begin(&player1) // start window loop
 }
 
 

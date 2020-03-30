@@ -32,8 +32,3 @@ func (p *Player) print(){  // wrapper for printing player's details
 func (p *Player) TakeDamage(damage i32){
 	p.health = p.health - damage         // Take damage
 }
-
-func (p *Player) GetPlayerHp() (hp i32){
-	i32.print(p.health)
-	hp = p.health
-}
