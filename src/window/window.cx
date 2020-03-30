@@ -1,0 +1,27 @@
+package window
+
+import "gam"
+import "gfx"
+import "gui"
+
+func Begin(){
+    // init
+	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
+	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+
+	// gameScreen
+	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
+	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
+	gui.ScreenSetDuration(gameScreen, -1.0D)
+	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
+	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
+	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
+
+	// run
+	gui.ScreenShow(gameScreen)
+	gam.Run(2U)
+
+	// destroy
+	gfx.MeshUnlock(mesh)
+	gam.Destroy()
+}

@@ -1,9 +1,9 @@
 package main
 
 //cx-fighters libs
-import "combat"
 import "menus"
 import "window"
+import "player"
 
 //CXFX libs
 import "app"
@@ -15,6 +15,23 @@ import "v4"
 
 // Globals ...
 var mesh gfx.MeshId
+
+func main(){
+	var player1 Player 					    // create new player struct
+	player1.PlayerInit(100, 32, "Animal")   // update player 
+	
+	player1.print()							// print player states
+	player1.TakeDamage(34)					// apply damage
+	player1.print()
+	player1.TakeDamage(76)
+	
+	i32.print(player1.health)				// print just player health
+	
+	window.Begin() // start window loop
+}
+
+
+// ==================== Event Handlers =========================
 
 func gameOnEvent(controlIndex i32, controlAction i32) {
 
@@ -40,32 +57,4 @@ func gameOnUpdate(controlIndex i32, controlAction i32) {
 func gameOnRender(controlIndex i32, controlAction i32) {
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 	gfx.MeshRender(mesh)
-}
-
-func main(){
-    // init
-	gam.Init("Colored Quad Tutorial", 800, 600, 60, "")
-	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
-
-	// gameScreen
-	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
-	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
-	gui.ScreenSetDuration(gameScreen, -1.0D)
-	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
-	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
-	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
-
-	// run
-	gui.ScreenShow(gameScreen)
-	gam.Run(2U)
-
-	// destroy
-	gfx.MeshUnlock(mesh)
-	gam.Destroy()
-
-	//Game Logic
-	menus.displayMainMenu()  				//run test function from module "menus.cx"
-	str.print("Hello World, Let's Fight")   //print hello world for game program
-	combat.punch()							//get 'em
-
 }

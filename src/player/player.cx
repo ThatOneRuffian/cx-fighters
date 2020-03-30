@@ -1,0 +1,36 @@
+package player
+
+type Player struct{ // player attributes 
+	health i32
+	speed i32
+	name str
+	loc Loc
+}
+
+type Loc struct{   // player location
+	x i32
+	y i32
+}
+
+func (p *Player) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
+	p.health = _health
+	p.speed = _speed
+	p.name = _name
+}
+
+func (p *Player) print(){  // wrapper for printing player's details 
+	str.print(p.name)
+	i32.print(p.speed)
+	i32.print(p.health)
+	i32.print(p.loc.x)
+	i32.print(p.loc.y)
+}
+
+func (p *Player) TakeDamage(damage i32){
+	p.health = p.health - damage         // Take damage
+}
+
+func (p *Player) GetPlayerHp() (hp i32){
+	i32.print(p.health)
+	hp = p.health
+}
