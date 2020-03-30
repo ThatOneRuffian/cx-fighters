@@ -2,7 +2,7 @@ package main
 
 //cx-fighters libs
 import "menus"
-import "window"
+import "gameWindow"
 import "player"
 
 //CXFX libs
@@ -14,14 +14,14 @@ import "mat"
 import "v4"
 
 func main(){
-	window.Begin() // start window loop
+	gameWindow.Begin() // start window loop
 }
 
 
 // ==================== Event Handlers =========================
 
 func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input from keyboard/mouse
-	window.inputHandler()
+	gameWindow.inputHandler()
 }
 
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
