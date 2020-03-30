@@ -13,48 +13,34 @@ import "gui"
 import "mat"
 import "v4"
 
-// Globals ...
-var mesh gfx.MeshId
-
 func main(){
-	var player1 Player 					    // create new player struct
-	player1.PlayerInit(100, 32, "Animal")   // update player 
-	
-	player1.print()							// print player states
-	player1.TakeDamage(34)					// apply damage
-	player1.print()
-	player1.TakeDamage(76)
-	
-	i32.print(player1.health)				// print just player health
-	
 	window.Begin() // start window loop
 }
 
 
 // ==================== Event Handlers =========================
 
-func gameOnEvent(controlIndex i32, controlAction i32) {
-
+func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input from keyboard/mouse
 	window.inputHandler()
 }
 
-func gameOnUpdate(controlIndex i32, controlAction i32) {
+func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
 	var w f32 = 200.0
 	var h f32 = 200.0
 	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
 	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
 
-	gfx.MeshBegin(mesh)
+	/*gfx.MeshBegin(mesh)
 	gfx.MeshAppendOrthoQuad(mesh,
 			v4.make(x, y, w, h),
 			v4.BLUE,
 			v4.GREEN,
 			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
 			0.0)
-	gfx.MeshEnd(mesh)
+	gfx.MeshEnd(mesh)*/
 }
 
-func gameOnRender(controlIndex i32, controlAction i32) {
+func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
-	gfx.MeshRender(mesh)
+	//gfx.MeshRender(mesh)
 }
