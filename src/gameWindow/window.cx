@@ -9,10 +9,9 @@ import "player"
 import "v4"
 
 func Begin(){
-
+	
     // init
 	gam.Init("CX-Fighters", 800, 600, 60, "")
-	var mesh gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
 	// gameScreen
 	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
@@ -27,24 +26,6 @@ func Begin(){
 	gam.Run(2U)
 
 	// destroy
-	gfx.MeshUnlock(mesh)
+	//gfx.MeshUnlock(mesh)
 	gam.Destroy()
 }
-
-func RenderMeshes(pl *Player){
-	var w f32 = 200.0
-	var h f32 = 200.0
-	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
-	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
-
-	gfx.MeshBegin(pl.mesh)
-	gfx.MeshAppendOrthoQuad(pl.mesh,
-			v4.make(x, y, w, h),
-			v4.BLUE,
-			v4.GREEN,
-			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
-			0.0)
-	gfx.MeshEnd(pl.mesh)
-}
-
-

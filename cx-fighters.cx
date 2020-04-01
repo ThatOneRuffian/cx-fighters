@@ -11,14 +11,11 @@ import "gam"
 import "gfx"
 import "gui"
 import "mat"
-
+import "v4"
 
 var player1 Player 					    // create player1 struct
 
 func main(){
-	str.print("test")
-	//player1.mesh = gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
-
 	gameWindow.Begin() // start window loop
 }
 
@@ -28,22 +25,30 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 	gameWindow.inputHandler()
 }
 
-
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
-	gameWindow.RenderMeshes(&player1)
-	
+	player1.name = "testname"
+	player1.TakeDamage(32)
 	player1.print()
-	str.print(player1.name)
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
+	
+	player1.mesh = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
+	//gameWindow.RenderMeshes(&player1)
+	
+	var w f32 = 200.0
+	var h f32 = 200.0
+	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
+	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
 
+	gfx.MeshBegin(player1.mesh)
+	gfx.MeshAppendOrthoQuad(player1.mesh,
+			v4.make(player1.loc.x, player1.loc.y, w, h),
+			v4.BLUE,
+			v4.GREEN,
+			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
+			0.0)
+	gfx.MeshEnd(player1.mesh)
 	gfx.MeshRender(player1.mesh)
 }
-
-
-
-// ======= debug
-
-
