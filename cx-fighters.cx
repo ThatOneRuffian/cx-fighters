@@ -5,24 +5,22 @@ import "menus"
 import "gameWindow"
 import "player"
 
-//CXFX libs
+//CXFX libsgameWindow.
 import "app"
 import "gam"
 import "gfx"
 import "gui"
 import "mat"
-import "v4"
 
-var player1 Player 					    // create new player struct
+
+var player1 Player 					    // create player1 struct
 
 func main(){
-	gameWindow.Begin(&player1) // start window loop
-}
+	str.print("test")
+	//player1.mesh = gfx.MeshId = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
 
-func (pl **Player) GetHealth() (hp i32){  // setup player attributes 
-	hp = pl.health
+	gameWindow.Begin() // start window loop
 }
-
 
 // ==================== Event Handlers =========================
 
@@ -30,12 +28,22 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 	gameWindow.inputHandler()
 }
 
+
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
 	gameWindow.RenderMeshes(&player1)
+	
+	player1.print()
+	str.print(player1.name)
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 
-	//gfx.MeshRender(player1.mesh)
+	gfx.MeshRender(player1.mesh)
 }
+
+
+
+// ======= debug
+
+

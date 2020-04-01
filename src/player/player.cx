@@ -15,13 +15,14 @@ type Loc struct{   // player location
 	y i32
 }
 
-func (pl **Player) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
+func (pl *Player) PlayerInit(_health i32, _speed i32, _name str, _mesh gfx.MeshId){  // setup player attributes 
 	pl.health = _health
 	pl.speed = _speed
 	pl.name = _name
+	pl.mesh = _mesh
 }
 
-func (pl **Player) print(){  // wrapper for printing player's details 
+func (pl *Player) print(){  // wrapper for printing player's details 
 	str.print(pl.name)
 	i32.print(pl.speed)
 	i32.print(pl.health)
@@ -29,6 +30,6 @@ func (pl **Player) print(){  // wrapper for printing player's details
 	i32.print(pl.loc.y)
 }
 
-func (pl **Player) TakeDamage(damage i32){
+func (pl *Player) TakeDamage(damage i32){
 	pl.health = pl.health - damage         // Take damage
 }
