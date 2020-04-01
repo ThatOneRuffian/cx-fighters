@@ -22,20 +22,34 @@ func main(){
 // ==================== Event Handlers =========================
 
 func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input from keyboard/mouse
-	gameWindow.inputHandler()
+	//gameWindow.inputHandler()
+	var key i32 = gui.CurrentEvent.keyboard.key
+	var action i32 = gui.CurrentEvent.keyboard.action
+	var mods i32 = gui.CurrentEvent.keyboard.mods
+	if mods == app.MOD_NONE {
+		if key == app.KEYCODE_ESCAPE && action == app.KEY_PRESS {
+			app.Exit()
+		}
+		if key == app.KEYCODE_RIGHT && action == app.KEY_PRESS{
+			//player1.setLoc(20.0, 300.0)
+		}
+		if key == app.KEYCODE_LEFT && action == app.KEY_PRESS{
+			//player1.setLoc(300.0, 20.0)
+		}
+	}
 }
 
 func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
 	player1.name = "testname"
 	player1.TakeDamage(32)
 	player1.print()
+	//player1.setLoc(20.0,100.0)
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
 	gfx.EffectUse(gfx.g_fxVertexColor2D)
 	
 	player1.mesh = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
-	//gameWindow.RenderMeshes(&player1)
 	
 	var w f32 = 200.0
 	var h f32 = 200.0
