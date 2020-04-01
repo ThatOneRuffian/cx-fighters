@@ -38,7 +38,6 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 		if key == app.KEYCODE_LEFT{
 			player1.setLoc(player1.loc.x - 1.0, player1.loc.y)
 		}
-
 		if key == app.KEYCODE_UP{
 			player1.setLoc(player1.loc.x + 0.0, player1.loc.y + 1.0)
 		}
