@@ -1,11 +1,9 @@
 package window
 
 package gameWindow
-
 import "gam"
 import "gfx"
 import "gui"
-import "player"
 import "v4"
 
 func Begin(){

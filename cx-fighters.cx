@@ -14,6 +14,7 @@ import "mat"
 import "v4"
 
 var player1 Player 					    // create player1 struct
+var buffer f32
 
 func main(){
 	gameWindow.Begin() // start window loop
@@ -22,7 +23,8 @@ func main(){
 // ==================== Event Handlers =========================
 
 func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input from keyboard/mouse
-	//gameWindow.inputHandler()
+	player1.name = player1.name  // Bug fix to make player1 accessible to this function
+	
 	var key i32 = gui.CurrentEvent.keyboard.key
 	var action i32 = gui.CurrentEvent.keyboard.action
 	var mods i32 = gui.CurrentEvent.keyboard.mods
@@ -30,12 +32,20 @@ func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input
 		if key == app.KEYCODE_ESCAPE && action == app.KEY_PRESS {
 			app.Exit()
 		}
-		if key == app.KEYCODE_RIGHT && action == app.KEY_PRESS{
-			//player1.setLoc(20.0, 300.0)
+		if key == app.KEYCODE_RIGHT{
+			player1.setLoc(player1.loc.x + 1.0, player1.loc.y)
 		}
-		if key == app.KEYCODE_LEFT && action == app.KEY_PRESS{
-			//player1.setLoc(300.0, 20.0)
+		if key == app.KEYCODE_LEFT{
+			player1.setLoc(player1.loc.x - 1.0, player1.loc.y)
 		}
+
+		if key == app.KEYCODE_UP{
+			player1.setLoc(player1.loc.x + 0.0, player1.loc.y + 1.0)
+		}
+		if key == app.KEYCODE_DOWN{
+			player1.setLoc(player1.loc.x - 0.0, player1.loc.y - 1.0)
+		}
+
 	}
 }
 
@@ -43,7 +53,6 @@ func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - ru
 	player1.name = "testname"
 	player1.TakeDamage(32)
 	player1.print()
-	//player1.setLoc(20.0,100.0)
 }
 
 func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
