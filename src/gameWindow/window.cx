@@ -1,17 +1,25 @@
 package gameWindow
 
 import "glfw"
-
+import "gl"
+import "inputs"
 
 type Window struct {
     Height i32
     Width i32
 }
 
-func SetupCallbacks () {
-    glfw.SetKeyCallback("window", "keyEventCallback")
+func InitGlfw(window Window) {
+    glfw.Init()
+    glfw.WindowHint(glfw.Resizable, glfw.False)
+    glfw.CreateWindow("window", window.Width, window.Height, "SynthCat Brick Breaker")
+    glfw.MakeContextCurrent("window")
+    inputs.SetupCallbacks()
 }
 
-func Begin(){
-
+func StartWindow(){
+	var window Window
+    window = Window{ Width: 1600, Height: 768 }
+    InitGlfw(window)
+    gl.Init()
 }
