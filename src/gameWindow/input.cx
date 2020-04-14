@@ -1,0 +1,6 @@
+package inputs
+import "glfw"
+
+func SetupCallbacks () {
+    glfw.SetKeyCallback("window", "keyEventCallback")
+}
