@@ -1,29 +1,17 @@
-package window
-
 package gameWindow
-import "gam"
-import "gfx"
-import "gui"
-import "v4"
+
+import "glfw"
+
+
+type Window struct {
+    Height i32
+    Width i32
+}
+
+func SetupCallbacks () {
+    glfw.SetKeyCallback("window", "keyEventCallback")
+}
 
 func Begin(){
-	
-    // init
-	gam.Init("CX-Fighters", 800, 600, 60, "")
 
-	// gameScreen
-	var gameScreen gui.ScreenId = gui.ScreenCreate("gameScreen")
-	gui.ControlSetDock(gameScreen.base, gui.DOCK_FILL)
-	gui.ScreenSetDuration(gameScreen, -1.0D)
-	gui.ScreenSetOnEvent(gameScreen, "main", "gameOnEvent")
-	gui.ScreenSetOnUpdate(gameScreen, "main", "gameOnUpdate")
-	gui.ScreenSetOnRender(gameScreen, "main", "gameOnRender")
-
-	// run
-	gui.ScreenShow(gameScreen)
-	gam.Run(2U)
-
-	// destroy
-	//gfx.MeshUnlock(mesh)
-	gam.Destroy()
 }

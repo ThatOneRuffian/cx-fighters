@@ -3,74 +3,30 @@ package main
 //cx-fighters libs
 import "menus"
 import "gameWindow"
-import "player"
+import "inputs"
 
-//CXFX libsgameWindow.
-import "app"
-import "gam"
-import "gfx"
-import "gui"
-import "mat"
-import "v4"
+//base libs
+import "glfw"
+import "gl"
+import "os"
 
-var player1 Player 					    // create player1 struct
-var buffer f32
+func initGlfw(window Window) {
+    glfw.Init()
+    glfw.WindowHint(glfw.Resizable, glfw.False)
+    glfw.CreateWindow("window", window.Width, window.Height, "SynthCat Brick Breaker")
+    glfw.MakeContextCurrent("window")
+    inputs.SetupCallbacks()
+}
 
 func main(){
-	gameWindow.Begin() // start window loop
+	var window Window
+    window = Window{ Width: 1024, Height: 768 }
+
+    initGlfw(window)
+    gl.Init()
+    
+    render:
+		test := true //game code goes here
+	goto render
 }
 
-// ==================== Event Handlers =========================
-
-func gameOnEvent(controlIndex i32, controlAction i32) { // updates on user input from keyboard/mouse
-	player1.name = player1.name  // Bug fix to make player1 accessible to this function
-	
-	var key i32 = gui.CurrentEvent.keyboard.key
-	var action i32 = gui.CurrentEvent.keyboard.action
-	var mods i32 = gui.CurrentEvent.keyboard.mods
-	if mods == app.MOD_NONE {
-		if key == app.KEYCODE_ESCAPE && action == app.KEY_PRESS {
-			app.Exit()
-		}
-		if key == app.KEYCODE_RIGHT{
-			player1.setLoc(player1.loc.x + 1.0, player1.loc.y)
-		}
-		if key == app.KEYCODE_LEFT{
-			player1.setLoc(player1.loc.x - 1.0, player1.loc.y)
-		}
-		if key == app.KEYCODE_UP{
-			player1.setLoc(player1.loc.x + 0.0, player1.loc.y + 1.0)
-		}
-		if key == app.KEYCODE_DOWN{
-			player1.setLoc(player1.loc.x - 0.0, player1.loc.y - 1.0)
-		}
-
-	}
-}
-
-func gameOnUpdate(controlIndex i32, controlAction i32) {  // runs each tick - runs after input handler - game code 
-	player1.name = "testname"
-	player1.TakeDamage(32)
-	player1.print()
-}
-
-func gameOnRender(controlIndex i32, controlAction i32) {  // runs each tick - runs after game code - screen rendering
-	gfx.EffectUse(gfx.g_fxVertexColor2D)
-	
-	player1.mesh = gfx.MeshLock(gfx.TRIANGLES, gfx.UNSIGNED_SHORT, 6, gfx.g_vertexLayout, 4)
-	
-	var w f32 = 200.0
-	var h f32 = 200.0
-	var x f32 = (gfx.gfx_viewportSize.x - w) / 2.0
-	var y f32 = (gfx.gfx_viewportSize.y - h) / 2.0
-
-	gfx.MeshBegin(player1.mesh)
-	gfx.MeshAppendOrthoQuad(player1.mesh,
-			v4.make(player1.loc.x, player1.loc.y, w, h),
-			v4.BLUE,
-			v4.GREEN,
-			v4.make(0.0, 0.0, gfx.gfx_viewportSize.x, gfx.gfx_viewportSize.y),
-			0.0)
-	gfx.MeshEnd(player1.mesh)
-	gfx.MeshRender(player1.mesh)
-}

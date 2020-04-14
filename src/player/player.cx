@@ -1,13 +1,12 @@
 package player
 
-import "gfx"
+
 
 type Player struct{ // player attributes 
 	health i32
 	speed i32		// speed of character
 	name str		// name of character
 	loc Loc			// x,y location of the player
-	mesh gfx.MeshId // player mesh
 }
 
 type Loc struct{   // player location
@@ -15,11 +14,10 @@ type Loc struct{   // player location
 	y f32
 }
 
-func (pl *Player) PlayerInit(_health i32, _speed i32, _name str, _mesh gfx.MeshId){  // setup player attributes 
+func (pl *Player) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
 	pl.health = _health
 	pl.speed = _speed
 	pl.name = _name
-	pl.mesh = _mesh
 }
 
 func (pl *Player) print(){  // wrapper for printing player's details 
