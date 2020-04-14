@@ -3,6 +3,8 @@ package main
 import "gameWindow"
 import "vector"
 import "os"
+import "LoopLimiter"
+import "LoopTracker"
 
 type Sprite struct {
     position Vector2D

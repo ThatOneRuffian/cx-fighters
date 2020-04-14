@@ -3,8 +3,6 @@ package main
 //cx-fighters libs
 import "menus"
 import "gameWindow"
-import "LoopLimiter"
-import "LoopTracker"
 import "inputs"
 
 //base libs
