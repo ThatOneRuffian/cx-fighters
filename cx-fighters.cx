@@ -26,7 +26,7 @@ func main(){
     gl.Init()
     
     render:
-		test := true //game code goes here
+		test := true //game loop goes here
 	goto render
 }
 
