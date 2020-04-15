@@ -1,5 +1,0 @@
-package menus
-
-func displayMainMenu(){
-	str.print("Window Created")  //print test string to ensure that function is linked to main
-}

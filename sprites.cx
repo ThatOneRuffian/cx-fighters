@@ -1,5 +1,10 @@
 package main
 
+type Vector2D struct {
+    x f32
+    y f32
+}
+
 type Sprite struct {
     position Vector2D
     lastPosition Vector2D

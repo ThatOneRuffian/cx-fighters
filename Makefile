@@ -1,2 +1,2 @@
 all:
-	~/go/bin/cx --debug-profile=100 ./src/  *.cx
+	~/go/bin/cx --debug-profile=100 *.cx
