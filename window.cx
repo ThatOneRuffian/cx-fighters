@@ -12,7 +12,6 @@ type Window struct {
 }
 
 func startWindow(window Window){
-    //var window Window
     window = Window{ Width: window.Width, Height: window.Height }
 
     initGlfw(window, window.Name)

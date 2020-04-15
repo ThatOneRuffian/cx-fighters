@@ -31,9 +31,8 @@ func updateActions(){
 }
 
 func updateSprites(){
-	synthCat = updateSprite(synthCat)         
-	yarnBall = updateSprite(yarnBall)
-	
+	updateSprite(&synthCat)
+	updateSprite(&yarnBall)	
 }
 
 func initSprites() {
@@ -56,14 +55,15 @@ func renderSprites(){
     
     // render array of sprites
     
-    var brick Sprite
+    //var brick Sprite
+    drawSprites(bricks)
 
-	for i:=0; i<len(bricks); i=i+1{
+	/*for i:=0; i<len(bricks); i=i+1{
 		brick = bricks[i]
 		if brick.brickHit == false {
 			//drawSprite(brick)
 		}
-	}
+	}*/
 }
 
 func prepWindowGl(program i32){

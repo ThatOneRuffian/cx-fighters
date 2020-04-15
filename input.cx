@@ -23,12 +23,12 @@ func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) 
 	str.print("==================")
 	
 	// Exit 
-	
 	if key == KEYCODE_ESCAPE && action == 1 { 
 		escapePressed = true
 	}else if key == KEYCODE_ESCAPE && action == 0 {
 		escapePressed = false
     }
+    
     // Left
     if key == KEYCODE_LEFT && action == 1 {
 		leftPressed = true

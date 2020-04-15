@@ -21,5 +21,5 @@ func main(){
 	gameWindow = Window{ Width: 1600, Height: 800, Name: "CX-Fighters", Running: true } // setup window attributes
 	
 	window.startWindow(gameWindow)  // setup window resolution and start empty window
-	gameLoop() 		     		// game/render loop goes here
+	gameLoop() 		     		    // game/render loop goes here
 }
