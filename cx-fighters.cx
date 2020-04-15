@@ -17,5 +17,5 @@ var loopTracker LoopTracker.LoopTracker = LoopTracker.create(1.0D, "Main")
 
 func main(){
 	window.startWindow(1600, 800, "CX-Fighters")  // setup window resolution and start empty window
-	gameLoop() 		     		   // game/render loop goes here
+	gameLoop() 		     		 				  // game/render loop goes here
 }
