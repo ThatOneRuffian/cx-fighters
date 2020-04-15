@@ -1,0 +1,96 @@
+package main
+import "glfw"
+import "inputs"
+
+type Window struct {
+    Height i32
+    Width i32
+}
+
+func startWindow(){
+    var window Window
+    window = Window{ Width: 1600, Height: 768 }
+
+    initGlfw(window)
+    gl.Init()
+}
+
+func initGlfw(window Window) {
+	glfw.Init()
+	glfw.WindowHint(glfw.Resizable, glfw.False)
+	glfw.CreateWindow("window", window.Width, window.Height, "SynthCat Brick Breaker")
+	glfw.MakeContextCurrent("window")
+	inputs.SetupCallbacks()
+}
+
+
+func mainGameLoop()() {
+    var program i32 = gl.CreateProgram()
+    initSprites()
+    synthCat.position.y = -0.8
+    yarnBall.position.x = 0.0
+    yarnBall.position.y = -0.8
+    yarnBall.velocity.y = 0.3
+    yarnBall.velocity.x = 0.6
+
+    for bool.not(glfw.ShouldClose("window")) {
+        currentTime = glfw.GetTime()
+        loopLimiter = LoopLimiter.update(loopLimiter, currentTime)
+        animationLimiter = LoopLimiter.update(animationLimiter, currentTime)
+        loopTracker = LoopTracker.update(loopTracker, currentTime)
+
+        synthCat = inputs.updatePlayer(synthCat)
+        yarnBall = updateBall(yarnBall)
+        checkBrickCollisions()
+
+        synthCat = updateSprite(synthCat)
+        yarnBall = updateSprite(yarnBall)
+
+        if loopLimiter.limitReached {
+            gl.UseProgram(program)
+            gl.Clear(i32.bitor(gl.COLOR_BUFFER_BIT, gl.DEPTH_BUFFER_BIT))
+            gl.Enable(gl.TEXTURE_2D)
+            gl.Disable(gl.DITHER)
+            gl.Disable(gl.POINT_SMOOTH)
+            gl.Disable(gl.LINE_SMOOTH)
+            gl.Disable(gl.POLYGON_SMOOTH)
+            gl.Hint(gl.POINT_SMOOTH, gl.DONT_CARE)
+            gl.Hint(gl.LINE_SMOOTH, gl.DONT_CARE)
+            gl.Hint(gl.POLYGON_SMOOTH_HINT, gl.DONT_CARE)
+            gl.Disable(gl.MULTISAMPLE_ARB)
+            
+            gl.TexEnvi(gl.TEXTURE_ENV, gl.TEXTURE_ENV_MODE, gl.MODULATE)
+            gl.Disable(gl.DEPTH_TEST)
+
+            gl.ClearColor(1.0, 1.0, 1.0, 1.0)
+            gl.ClearDepth(1.0D)
+            gl.DepthFunc(gl.LEQUAL)
+            
+            gl.Enable(gl.BLEND)
+            gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+            gl.DepthMask(true)
+
+            gl.MatrixMode(gl.PROJECTION)
+            gl.LoadIdentity()
+
+            gl.MatrixMode(gl.MODELVIEW)
+            gl.LoadIdentity()
+
+            drawSprite(background)
+            drawSprite(synthCat)
+            //drawSprite(yarnBall)
+
+            var brick Sprite
+
+            for i:=0; i<len(bricks); i=i+1{
+                brick = bricks[i]
+                if brick.brickHit == false {
+                    //drawSprite(brick)
+                }
+            }
+                        
+            glfw.PollEvents()
+            glfw.SwapBuffers("window")
+        }
+    }
+}

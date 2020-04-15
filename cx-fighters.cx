@@ -1,8 +1,6 @@
 package main
 
 //cx-fighters libs
-import "menus"
-//import "gameWindow"
 import "inputs"
 import "LoopLimiter"
 import "LoopTracker"
@@ -12,8 +10,6 @@ import "vector"
 import "glfw"
 import "gl"
 import "os"
-
-//import "app"
 import "inputs"
 import "LoopLimiter"
 import "LoopTracker"
@@ -25,7 +21,5 @@ var loopTracker LoopTracker.LoopTracker = LoopTracker.create(1.0D, "Main")
 
 func main(){
 	startWindow()  // setup window and start
-    
 	mainGameLoop() // game/render loop goes here
 }
-
