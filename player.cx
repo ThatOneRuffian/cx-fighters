@@ -1,7 +1,5 @@
 package player
 
-
-
 type Player struct{ // player attributes 
 	health i32
 	speed i32		// speed of character

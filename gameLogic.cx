@@ -2,29 +2,7 @@ package main
 import "glfw"
 import "inputs"
 
-type Window struct {
-    Height i32
-    Width i32
-}
-
-func startWindow(){
-    var window Window
-    window = Window{ Width: 1600, Height: 768 }
-
-    initGlfw(window)
-    gl.Init()
-}
-
-func initGlfw(window Window) {
-	glfw.Init()
-	glfw.WindowHint(glfw.Resizable, glfw.False)
-	glfw.CreateWindow("window", window.Width, window.Height, "SynthCat Brick Breaker")
-	glfw.MakeContextCurrent("window")
-	inputs.SetupCallbacks()
-}
-
-
-func mainGameLoop()() {
+func gameLoop()() {
     var program i32 = gl.CreateProgram()
     initSprites()
     synthCat.position.y = -0.8

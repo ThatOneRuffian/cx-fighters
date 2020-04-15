@@ -1,21 +1,16 @@
 package inputs
 
-
 import "glfw"
 import "main"
-
 
 var upPressed bool
 var downPressed bool
 var leftPressed bool
 var rightPressed bool
 
-
-
 func SetupCallbacks () {
     glfw.SetKeyCallback("window", "keyEventCallback")
 }
-
 
 func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) {
     // Up
