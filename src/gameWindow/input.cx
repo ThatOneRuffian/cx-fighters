@@ -1,8 +1,8 @@
 package inputs
 
-import "main"
-import "glfw"
 
+import "glfw"
+import "main"
 
 
 var upPressed bool
