@@ -121,6 +121,8 @@ func draw(xCoord f32, yCoord f32, width f32, height f32, texture i32) {
 
 // ============= old functions ===========
 
+// create function to init generic sprites
+
 func createYarnBallSprite()(yarnBall Sprite) {
     yarnBall.acceleration = 1.0
     yarnBall.maxVelocity = 1.0

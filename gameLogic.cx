@@ -54,16 +54,8 @@ func renderSprites(){
     drawSprite(synthCat)
     
     // render array of sprites
-    
-    //var brick Sprite
     drawSprites(bricks)
 
-	/*for i:=0; i<len(bricks); i=i+1{
-		brick = bricks[i]
-		if brick.brickHit == false {
-			//drawSprite(brick)
-		}
-	}*/
 }
 
 func prepWindowGl(program i32){

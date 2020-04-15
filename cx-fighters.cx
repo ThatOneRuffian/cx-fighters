@@ -23,3 +23,4 @@ func main(){
 	window.startWindow(gameWindow)  // setup window resolution and start empty window
 	gameLoop() 		     		    // game/render loop goes here
 }
+
