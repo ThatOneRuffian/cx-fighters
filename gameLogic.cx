@@ -3,73 +3,121 @@ import "glfw"
 import "inputs"
 
 func gameLoop()() {
-    var program i32 = gl.CreateProgram()
-    initSprites()
-    synthCat.position.y = -0.8
+    var program i32 = gl.CreateProgram() // create program object to apply shaders and 
+    
+    initSprites() 	// create sprites and their starting location
+   
+    for bool.not(glfw.ShouldClose("window")) && gameWindow.Running {
+		updateGameTimers() // frame rate, animation, and tracking
+		
+		updateActions() // update game data based on player inputs
+		updateSprites() // update sprite positions based on their velocity
+		
+        if loopLimiter.limitReached {
+            
+			prepWindowGl(program)  // reload gl window attributes
+			renderSprites()
+			
+            glfw.PollEvents()  			// poll keyboard and mouse events
+            glfw.SwapBuffers("window")  // update screen buffer
+        }
+    }
+}
+
+func updateActions(){
+	window.updateWindow(&gameWindow) // parse player input meant for the current window 
+	synthCat = inputs.updatePlayer(synthCat)  // update synthCat sprite based on player input
+}
+
+func updateSprites(){
+	synthCat = updateSprite(synthCat)         
+	yarnBall = updateSprite(yarnBall)
+	
+}
+
+func initSprites() {
+    background = createBackgroundSprite()
+    synthCat  = createSynthCatSprite()
+    yarnBall = createYarnBallSprite()
+    
+    synthCat.position.y = -0.8    // what are the units on these, %? 
     yarnBall.position.x = 0.0
     yarnBall.position.y = -0.8
     yarnBall.velocity.y = 0.3
     yarnBall.velocity.x = 0.6
 
-    for bool.not(glfw.ShouldClose("window")) {
-        currentTime = glfw.GetTime()
-        loopLimiter = LoopLimiter.update(loopLimiter, currentTime)
-        animationLimiter = LoopLimiter.update(animationLimiter, currentTime)
-        loopTracker = LoopTracker.update(loopTracker, currentTime)
+    initBricks()
+}
 
-        synthCat = inputs.updatePlayer(synthCat)
-        yarnBall = updateBall(yarnBall)
-        checkBrickCollisions()
+func renderSprites(){
+	drawSprite(background)
+    drawSprite(synthCat)
+    
+    // render array of sprites
+    
+    var brick Sprite
 
-        synthCat = updateSprite(synthCat)
-        yarnBall = updateSprite(yarnBall)
+	for i:=0; i<len(bricks); i=i+1{
+		brick = bricks[i]
+		if brick.brickHit == false {
+			//drawSprite(brick)
+		}
+	}
+}
 
-        if loopLimiter.limitReached {
-            gl.UseProgram(program)
-            gl.Clear(i32.bitor(gl.COLOR_BUFFER_BIT, gl.DEPTH_BUFFER_BIT))
-            gl.Enable(gl.TEXTURE_2D)
-            gl.Disable(gl.DITHER)
-            gl.Disable(gl.POINT_SMOOTH)
-            gl.Disable(gl.LINE_SMOOTH)
-            gl.Disable(gl.POLYGON_SMOOTH)
-            gl.Hint(gl.POINT_SMOOTH, gl.DONT_CARE)
-            gl.Hint(gl.LINE_SMOOTH, gl.DONT_CARE)
-            gl.Hint(gl.POLYGON_SMOOTH_HINT, gl.DONT_CARE)
-            gl.Disable(gl.MULTISAMPLE_ARB)
-            
-            gl.TexEnvi(gl.TEXTURE_ENV, gl.TEXTURE_ENV_MODE, gl.MODULATE)
-            gl.Disable(gl.DEPTH_TEST)
+func prepWindowGl(program i32){
+	gl.UseProgram(program)
+	gl.Clear(i32.bitor(gl.COLOR_BUFFER_BIT, gl.DEPTH_BUFFER_BIT))
+	gl.Enable(gl.TEXTURE_2D)
+	gl.Disable(gl.DITHER)
+	gl.Disable(gl.POINT_SMOOTH)
+	gl.Disable(gl.LINE_SMOOTH)
+	gl.Disable(gl.POLYGON_SMOOTH)
+	gl.Hint(gl.POINT_SMOOTH, gl.DONT_CARE)
+	gl.Hint(gl.LINE_SMOOTH, gl.DONT_CARE)
+	gl.Hint(gl.POLYGON_SMOOTH_HINT, gl.DONT_CARE)
+	gl.Disable(gl.MULTISAMPLE_ARB)
 
-            gl.ClearColor(1.0, 1.0, 1.0, 1.0)
-            gl.ClearDepth(1.0D)
-            gl.DepthFunc(gl.LEQUAL)
-            
-            gl.Enable(gl.BLEND)
-            gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-            gl.DepthMask(true)
+	gl.TexEnvi(gl.TEXTURE_ENV, gl.TEXTURE_ENV_MODE, gl.MODULATE)
+	gl.Disable(gl.DEPTH_TEST)
 
-            gl.MatrixMode(gl.PROJECTION)
-            gl.LoadIdentity()
+	gl.ClearColor(1.0, 1.0, 1.0, 1.0)
+	gl.ClearDepth(1.0D)
+	gl.DepthFunc(gl.LEQUAL)
 
-            gl.MatrixMode(gl.MODELVIEW)
-            gl.LoadIdentity()
+	gl.Enable(gl.BLEND)
+	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+	gl.DepthMask(true)
 
-            drawSprite(background)
-            drawSprite(synthCat)
-            //drawSprite(yarnBall)
+	gl.MatrixMode(gl.PROJECTION)
+	gl.LoadIdentity()
 
-            var brick Sprite
+	gl.MatrixMode(gl.MODELVIEW)
+	gl.LoadIdentity()
+}
 
-            for i:=0; i<len(bricks); i=i+1{
-                brick = bricks[i]
-                if brick.brickHit == false {
-                    //drawSprite(brick)
-                }
-            }
-                        
-            glfw.PollEvents()
-            glfw.SwapBuffers("window")
-        }
+func updateGameTimers() {
+	// update game timers
+
+	currentTime = glfw.GetTime()
+	loopLimiter = LoopLimiter.update(loopLimiter, currentTime)    
+	animationLimiter = LoopLimiter.update(animationLimiter, currentTime)
+	loopTracker = LoopTracker.update(loopTracker, currentTime)
+}
+
+
+// ============== Old reference code ================
+
+func initBricks() {
+    var startPos Vector2D
+    var increment f32
+    increment = 128.0 / 1024.0
+    startPos.x = -0.55
+    startPos.y = -0.6
+
+    for i:=0; i<8; i=i+1 {
+        startPos.x = startPos.x + increment
+        bricks = append(bricks, createBrickSprite(startPos))
     }
 }
 

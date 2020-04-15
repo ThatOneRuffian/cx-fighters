@@ -1,5 +1,28 @@
 package main
 
+func checkCollision(spriteA Sprite, spriteB Sprite) (collision bool) {
+    var d1x f32
+    var d1y f32
+    var d2x f32
+    var d2y f32
+
+    collision = true
+
+    d1x = spriteLeft(spriteB) - spriteRight(spriteA)
+    d1y = spriteBottom(spriteB) - spriteTop(spriteA)
+    d2x = spriteLeft(spriteA) - spriteRight(spriteB)
+    d2y = spriteBottom(spriteA) - spriteTop(spriteB)
+
+    if d1x >= 0.0 || d1y >= 0.0{
+        collision = false
+    }
+    if d2x >= 0.0 || d2y >= 0.0 {
+        collision = false
+    }
+}
+
+// ============== Old reference code ================
+
 func checkBrickCollisions() {
     var collision bool
     var brick Sprite
@@ -30,26 +53,5 @@ func checkBrickCollisions() {
                 bricks[i] = brick
             }
         }
-    }
-}
-
-func checkCollision(spriteA Sprite, spriteB Sprite) (collision bool) {
-    var d1x f32
-    var d1y f32
-    var d2x f32
-    var d2y f32
-
-    collision = true
-
-    d1x = spriteLeft(spriteB) - spriteRight(spriteA)
-    d1y = spriteBottom(spriteB) - spriteTop(spriteA)
-    d2x = spriteLeft(spriteA) - spriteRight(spriteB)
-    d2y = spriteBottom(spriteA) - spriteTop(spriteB)
-
-    if d1x >= 0.0 || d1y >= 0.0{
-        collision = false
-    }
-    if d2x >= 0.0 || d2y >= 0.0 {
-        collision = false
     }
 }

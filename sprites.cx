@@ -23,27 +23,6 @@ var synthCat Sprite
 var yarnBall Sprite
 var bricks []Sprite
 
-func initSprites() {
-    background = createBackgroundSprite()
-    synthCat  = createSynthCatSprite()
-    yarnBall = createYarnBallSprite()
-
-    initBricks()
-}
-
-func initBricks() {
-    var startPos Vector2D
-    var increment f32
-    increment = 128.0 / 1024.0
-    startPos.x = -0.55
-    startPos.y = -0.6
-
-    for i:=0; i<8; i=i+1 {
-        startPos.x = startPos.x + increment
-        bricks = append(bricks, createBrickSprite(startPos))
-    }
-}
-
 func getTexture(textureFileName str)(texture i32) {
     var workingDirectory str = os.GetWorkingDirectory()
 

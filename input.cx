@@ -2,23 +2,33 @@ package inputs
 
 import "glfw"
 import "main"
+import "window"
 
 var upPressed bool
 var downPressed bool
 var leftPressed bool
 var rightPressed bool
+var escapePressed bool
 
 func SetupCallbacks () {
     glfw.SetKeyCallback("window", "keyEventCallback")
 }
 
 func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) {
-	
+	// what is the action code
 	str.print(window)
 	i32.print(scancode)
 	i32.print(action)
 	i32.print(mods)
 	str.print("==================")
+	
+	// Exit 
+	
+	if key == KEYCODE_ESCAPE && action == 1 { 
+		escapePressed = true
+	}else if key == KEYCODE_ESCAPE && action == 0 {
+		escapePressed = false
+    }
     // Left
     if key == KEYCODE_LEFT && action == 1 {
 		leftPressed = true
@@ -34,7 +44,13 @@ func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) 
     }
 }
 
-func updatePlayer (player main.Sprite) (out Sprite) {
+func updateWindow(gameWindow *Window){
+	if escapePressed == true{
+		gameWindow.Running = false
+	}
+}
+
+func updatePlayer (player Sprite) (out Sprite) {
     if rightPressed == true {
         player.velocity.x = player.maxVelocity
     } 

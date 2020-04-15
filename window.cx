@@ -7,13 +7,15 @@ import "inputs"
 type Window struct {
     Height i32
     Width i32
+    Name str
+    Running bool
 }
 
-func startWindow(width i32, height i32, windowName str){
-    var window Window
-    window = Window{ Width: width, Height: height }
+func startWindow(window Window){
+    //var window Window
+    window = Window{ Width: window.Width, Height: window.Height }
 
-    initGlfw(window, windowName)
+    initGlfw(window, window.Name)
     gl.Init()
 }
 
