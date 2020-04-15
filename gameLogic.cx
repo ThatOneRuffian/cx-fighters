@@ -72,3 +72,33 @@ func gameLoop()() {
         }
     }
 }
+
+func updateBall(ball Sprite)(out Sprite) {
+    if ball.position.x >= 0.9 || ball.position.x <= -0.9 {
+        ball.velocity.x = ball.velocity.x*-1.0
+        if ball.position.x > 0.9 {
+            ball.position.x = 0.9
+        } else {
+            ball.position.x = -0.9
+        }
+    }
+    
+    if ball.position.y >= 0.9 || ball.position.y <= -0.9 {
+        ball.velocity.y = ball.velocity.y*-1.0
+        if ball.position.y > 0.9 {
+            ball.position.y = 0.9
+        } else {
+            ball.position.y = -0.9
+        }
+    }
+
+    if spriteTop(ball) > spriteBottom(synthCat) && spriteLastTop(ball) < spriteLastBottom(synthCat) {
+        if spriteRight(ball) >= spriteLeft(synthCat) && spriteLeft(ball) <= spriteRight(synthCat) {
+            ball.position.y = spriteBottom(synthCat) - ball.height / 2.0
+            ball.velocity.y = ball.velocity.y*-1.0
+        }
+    }
+
+    ball.lastPosition = ball.position
+    out = ball
+}
