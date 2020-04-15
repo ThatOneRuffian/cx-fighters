@@ -50,7 +50,7 @@ func updateWindow(gameWindow *Window){
 	}
 }
 
-func updatePlayer (player Sprite) (out Sprite) {
+func updatePlayer (player *Sprite){
     if rightPressed == true {
         player.velocity.x = player.maxVelocity
     } 
@@ -61,5 +61,4 @@ func updatePlayer (player Sprite) (out Sprite) {
         player.velocity.x = 0.0
     }
     player.lastPosition = player.position
-    out = player
 }

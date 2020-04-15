@@ -22,11 +22,12 @@ func gameLoop()() {
             glfw.SwapBuffers("window")  // update screen buffer
         }
     }
+    str.print("Closing game")
 }
 
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
-	synthCat = inputs.updatePlayer(synthCat)  // update synthCat sprite based on player input
+	inputs.updatePlayer(&synthCat)
 }
 
 func updateSprites(){
