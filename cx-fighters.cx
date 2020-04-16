@@ -1,8 +1,6 @@
 package main
 
 import "window"
-
-// cx-fighters libs
 import "inputs"
 import "LoopLimiter"
 import "LoopTracker"
