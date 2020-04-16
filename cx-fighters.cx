@@ -19,7 +19,7 @@ func main(){
 	loopTracker.showLoopsPerSecond = false // lower noise in terminal
 	gameWindow = Window{ Width: 1600, Height: 800, Name: "CX-Fighters", Running: true } // setup window attributes
 	
-	window.startWindow(gameWindow)  // setup window resolution and start empty window
-	gameLoop() 		     		    // game/render loop goes here
+	window.startWindow(gameWindow)  // setup window and start empty window
+	gameLoop() 		     		    // game+render loop goes here
 }
 
