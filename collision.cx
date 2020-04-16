@@ -1,8 +1,5 @@
 package main
 
-
-
-
 func checkCollision(spriteA Sprite, spriteB Sprite) (collision bool) {
     var d1x f32
     var d1y f32

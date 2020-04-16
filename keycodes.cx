@@ -41,6 +41,7 @@ var KEYCODE_D i32 = 68
 var KEYCODE_S i32 = 83
 var KEYCODE_V i32 = 86
 var KEYCODE_W i32 = 87
+var KEYCODE_SPACE i32 = 32
 
 var MOD_NONE  i32 = 0
 var MOD_SHIFT i32 = 1

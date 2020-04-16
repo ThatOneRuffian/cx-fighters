@@ -9,6 +9,7 @@ var downPressed bool
 var leftPressed bool
 var rightPressed bool
 var escapePressed bool
+var spacePressed bool
 
 func SetupCallbacks () {
     glfw.SetKeyCallback("window", "keyEventCallback")
@@ -16,12 +17,23 @@ func SetupCallbacks () {
 
 func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) {
 	// what is the action code
+	str.print("key")
+	i32.print(key)
+
+	str.print("==================")
 	
 	// Exit 
 	if key == KEYCODE_ESCAPE && action == 1 { 
 		escapePressed = true
 	}else if key == KEYCODE_ESCAPE && action == 0 {
 		escapePressed = false
+    }
+    
+    // Jump
+    if key == KEYCODE_SPACE && action == 1 {
+		spacePressed = true
+	} else if key == KEYCODE_SPACE && action == 0 {
+		spacePressed = false
     }
     
     // Left
@@ -54,6 +66,9 @@ func updatePlayer (player *Sprite){
     } 
     if rightPressed == false && leftPressed == false {
         player.velocity.x = 0.0
+    }
+    if spacePressed == true {
+		player.jumping = true
     }
     player.lastPosition = player.position
 }
