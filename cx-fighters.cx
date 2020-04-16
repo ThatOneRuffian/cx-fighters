@@ -16,6 +16,7 @@ var animationLimiter LoopLimiter.LoopLimiter = LoopLimiter.create(5, true)
 var loopTracker LoopTracker.LoopTracker = LoopTracker.create(1.0D, "Main")
 
 func main(){
+	loopTracker.showLoopsPerSecond = false // lower noise in terminal
 	gameWindow = Window{ Width: 1600, Height: 800, Name: "CX-Fighters", Running: true } // setup window attributes
 	
 	window.startWindow(gameWindow)  // setup window resolution and start empty window

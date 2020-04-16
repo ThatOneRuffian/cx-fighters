@@ -1,5 +1,7 @@
 package main
 
+import "window"
+
 type Vector2D struct {
     x f32
     y f32
@@ -61,7 +63,14 @@ func updateSprite(sprite *Sprite){
     var dX f32 = f32.mul(sprite.velocity.x, f64.f32(loopTracker.deltaTime))
     var dY f32 = f32.mul(sprite.velocity.y, f64.f32(loopTracker.deltaTime))
     
-    sprite.position.x = sprite.position.x + dX
+    var spritePosX i32 = f32.i32(sprite.position.x)*gameWindow.Width
+    
+    if (spritePosX < gameWindow.Width && spritePosX > 0){
+		f32.print(sprite.position.x)
+		i32.print(gameWindow.Width)
+		sprite.position.x = sprite.position.x + dX
+	}
+	
     sprite.position.y = sprite.position.y + dY
 }
 
