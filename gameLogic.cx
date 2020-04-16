@@ -9,7 +9,7 @@ var yarnBall Sprite
 var bricks []Sprite
 var gameFloor f32 = -0.8
 
-func jump(synthCat *Sprite){
+func jumpHandler(synthCat *Sprite){
 	var jumpVelocity f32 = 5.0
 	if(synthCat.jumping && synthCat.jumpCount < 2000){
 		str.print("test:")
@@ -19,8 +19,8 @@ func jump(synthCat *Sprite){
 		synthCat.jumping = false
 		synthCat.velocity.y = -jumpVelocity
 	}else{
-			synthCat.velocity.y = 0.0
-			synthCat.jumpCount = 0
+		synthCat.velocity.y = 0.0
+		synthCat.jumpCount = 0
 	}
 }
 
@@ -34,7 +34,6 @@ func gameLoop()() {
 		
 		updateActions() // update game data based on player inputs
 		updateSprites() // update sprite positions based on their velocity
-		jump(&synthCat)
 		
         if loopLimiter.limitReached {
             
@@ -50,6 +49,7 @@ func gameLoop()() {
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
 	inputs.updatePlayer(&synthCat)
+	jumpHandler(&synthCat)
 }
 
 func updateSprites(){
