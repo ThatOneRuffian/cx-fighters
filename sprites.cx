@@ -68,9 +68,12 @@ func updateSpritePosition(sprite *Sprite){
     var dX f32 = f32.mul(sprite.velocity.x, f64.f32(loopTracker.deltaTime))
     var dY f32 = f32.mul(sprite.velocity.y, f64.f32(loopTracker.deltaTime))
 	
-	if(sprite.position.x + dX > 1.0 || sprite.position.x + dX < -1.0){  // window boundaries
+	var windowCollisionX bool = checkWinCollisionX(sprite, dX)
+	
+	bool.print(windowCollisionX)
+	if (windowCollisionX){
 		dX = 0.0
-	}
+	}			
 	
 	sprite.position.x = sprite.position.x + dX
 	sprite.position.y = sprite.position.y + dY
@@ -81,7 +84,6 @@ func drawSprites(sprites []Sprite) {
         drawSprite(sprites[i])
     }
 }
-
 
 func drawSprite(sprite Sprite) {
     var width f32

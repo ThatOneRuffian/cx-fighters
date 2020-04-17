@@ -21,6 +21,17 @@ func checkCollision(spriteA Sprite, spriteB Sprite) (collision bool) {
     }
 }
 
+func checkWinCollisionX(sprite *Sprite, delta f32)( collision bool){
+
+	var spritePadding f32 = sprite.width/2.0
+
+	if(sprite.position.x + delta + spritePadding > 1.0 || sprite.position.x + delta - spritePadding < -1.0){  // window boundaries
+		collision = true
+	} else{
+		collision = false
+	}
+}
+
 // ============== Old reference code ================
 
 func checkBrickCollisions() {

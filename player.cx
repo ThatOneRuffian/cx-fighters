@@ -18,14 +18,16 @@ func (pl *Sprite) TakeDamage(damage i32){
 
 func (pl *Sprite) jump(){
 	var jumpVelocity f32 = 7.0
-	if(pl.jumping && pl.jumpCount < 10000){
+	if(pl.jumping && pl.jumpCount < 2000){
 		pl.velocity.y = jumpVelocity
 		pl.jumpCount = synthCat.jumpCount + 1
 	}else if(pl.position.y  > gameFloor){ 
-		pl.jumping = false
 		pl.velocity.y = -jumpVelocity
+		pl.jumping = false
+
 	}else{
 		pl.velocity.y = 0.0
+		pl.position.y = gameFloor
 		pl.jumpCount = 0
 	}
 }

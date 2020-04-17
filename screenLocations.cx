@@ -1,0 +1,5 @@
+package main
+
+var gameFloor f32 = -0.8
+var player1SpawnX f32= -0.5
+var player2SpawnX f32 = 0.5
