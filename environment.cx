@@ -1,0 +1,30 @@
+package main
+
+var gameFloors []Sprite
+
+var cobbleStone str = "textures/cobblestone.png"
+
+func initGround() {
+    var startPos Vector2D
+    var increment f32
+    var runOnce bool = false  // skip first increment
+    increment = 128.0 / i32.f32(gameWindow.Width)
+    startPos.x = -1.1         // start rendering just left of screen to cover gap
+    startPos.y = -0.97
+
+    for i:=0; startPos.x<1.0; i=i+1 {    // render sprite along bottom boarder
+        startPos.x = startPos.x + increment
+        gameFloors = append(gameFloors, createFloorSprite(startPos))
+    }
+}
+
+func createFloorSprite(position Vector2D)(floor Sprite) {
+    var groundSpriteWidth f32 = 100.0 * 1.5
+    var groundSpriteHeight f32 = 50.0 * 1.25
+    
+    floor.position = position    
+    floor.width = groundSpriteWidth / i32.f32(gameWindow.Width)
+    floor.height = groundSpriteHeight / i32.f32(gameWindow.Height)
+
+    floor.frames = append(floor.frames, getTexture(cobbleStone))
+}

@@ -25,3 +25,34 @@ func initGlfw(window Window, windowName str) {
 	glfw.MakeContextCurrent("window")
 	inputs.SetupCallbacks()
 }
+
+func prepWindowGl(program i32){
+	gl.UseProgram(program)
+	gl.Clear(i32.bitor(gl.COLOR_BUFFER_BIT, gl.DEPTH_BUFFER_BIT))
+	gl.Enable(gl.TEXTURE_2D)
+	gl.Disable(gl.DITHER)
+	gl.Disable(gl.POINT_SMOOTH)
+	gl.Disable(gl.LINE_SMOOTH)
+	gl.Disable(gl.POLYGON_SMOOTH)
+	gl.Hint(gl.POINT_SMOOTH, gl.DONT_CARE)
+	gl.Hint(gl.LINE_SMOOTH, gl.DONT_CARE)
+	gl.Hint(gl.POLYGON_SMOOTH_HINT, gl.DONT_CARE)
+	gl.Disable(gl.MULTISAMPLE_ARB)
+
+	gl.TexEnvi(gl.TEXTURE_ENV, gl.TEXTURE_ENV_MODE, gl.MODULATE)
+	gl.Disable(gl.DEPTH_TEST)
+
+	gl.ClearColor(1.0, 1.0, 1.0, 1.0)
+	gl.ClearDepth(1.0D)
+	gl.DepthFunc(gl.LEQUAL)
+
+	gl.Enable(gl.BLEND)
+	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+	gl.DepthMask(true)
+
+	gl.MatrixMode(gl.PROJECTION)
+	gl.LoadIdentity()
+
+	gl.MatrixMode(gl.MODELVIEW)
+	gl.LoadIdentity()
+}

@@ -15,3 +15,17 @@ func (pl *Sprite) print(){  // wrapper for printing player's details
 func (pl *Sprite) TakeDamage(damage i32){
 	pl.health = pl.health - damage         // Take damage
 }
+
+func (pl *Sprite) jump(){
+	var jumpVelocity f32 = 7.0
+	if(pl.jumping && pl.jumpCount < 10000){
+		pl.velocity.y = jumpVelocity
+		pl.jumpCount = synthCat.jumpCount + 1
+	}else if(pl.position.y  > gameFloor){ 
+		pl.jumping = false
+		pl.velocity.y = -jumpVelocity
+	}else{
+		pl.velocity.y = 0.0
+		pl.jumpCount = 0
+	}
+}

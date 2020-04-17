@@ -9,21 +9,6 @@ var yarnBall Sprite
 var bricks []Sprite
 var gameFloor f32 = -0.8
 
-func jumpHandler(synthCat *Sprite){
-	var jumpVelocity f32 = 5.0
-	if(synthCat.jumping && synthCat.jumpCount < 2000){
-		str.print("test:")
-		synthCat.velocity.y = jumpVelocity
-		synthCat.jumpCount = synthCat.jumpCount + 1
-	}else if(synthCat.position.y  > gameFloor){ 
-		synthCat.jumping = false
-		synthCat.velocity.y = -jumpVelocity
-	}else{
-		synthCat.velocity.y = 0.0
-		synthCat.jumpCount = 0
-	}
-}
-
 func gameLoop()() {
     var program i32 = gl.CreateProgram() // create program object to apply shaders and 
     
@@ -37,24 +22,23 @@ func gameLoop()() {
 		
         if loopLimiter.limitReached {
             
-			prepWindowGl(program)  // reload gl window attributes
+			window.prepWindowGl(program)  // reload gl window attributes
 			renderSprites()
             glfw.PollEvents()  			// poll keyboard and mouse events
             glfw.SwapBuffers("window")  // update screen buffer
         }
     }
-    str.print("Closing game")
+    str.print("Game Exiting")
 }
 
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
 	inputs.updatePlayer(&synthCat)
-	jumpHandler(&synthCat)
+	synthCat.jump()
 }
 
 func updateSprites(){
 	updateSpritePosition(&synthCat)
-	updateSpritePosition(&yarnBall)	
 }
 
 func initSprites() {
@@ -70,48 +54,18 @@ func initSprites() {
 
 	synthCat.jumping = false
 	synthCat.jumpCount = 0
-
+	initGround()
     initBricks()
 }
 
 func renderSprites(){
 	drawSprite(background)
     drawSprite(synthCat)
-    
+    drawSprites(gameFloors)
+    //drawSprite(yarnBall)
     // render array of sprites
     //drawSprites(bricks)
 
-}
-
-func prepWindowGl(program i32){
-	gl.UseProgram(program)
-	gl.Clear(i32.bitor(gl.COLOR_BUFFER_BIT, gl.DEPTH_BUFFER_BIT))
-	gl.Enable(gl.TEXTURE_2D)
-	gl.Disable(gl.DITHER)
-	gl.Disable(gl.POINT_SMOOTH)
-	gl.Disable(gl.LINE_SMOOTH)
-	gl.Disable(gl.POLYGON_SMOOTH)
-	gl.Hint(gl.POINT_SMOOTH, gl.DONT_CARE)
-	gl.Hint(gl.LINE_SMOOTH, gl.DONT_CARE)
-	gl.Hint(gl.POLYGON_SMOOTH_HINT, gl.DONT_CARE)
-	gl.Disable(gl.MULTISAMPLE_ARB)
-
-	gl.TexEnvi(gl.TEXTURE_ENV, gl.TEXTURE_ENV_MODE, gl.MODULATE)
-	gl.Disable(gl.DEPTH_TEST)
-
-	gl.ClearColor(1.0, 1.0, 1.0, 1.0)
-	gl.ClearDepth(1.0D)
-	gl.DepthFunc(gl.LEQUAL)
-
-	gl.Enable(gl.BLEND)
-	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-	gl.DepthMask(true)
-
-	gl.MatrixMode(gl.PROJECTION)
-	gl.LoadIdentity()
-
-	gl.MatrixMode(gl.MODELVIEW)
-	gl.LoadIdentity()
 }
 
 func updateGameTimers() {
@@ -122,6 +76,7 @@ func updateGameTimers() {
 	animationLimiter = LoopLimiter.update(animationLimiter, currentTime)
 	loopTracker = LoopTracker.update(loopTracker, currentTime)
 }
+
 
 
 // ============== Old reference code ================
@@ -168,8 +123,6 @@ func updateBall(ball Sprite)(out Sprite) {
     ball.lastPosition = ball.position
     out = ball
 }
-
-// ============= old functions ===========
 
 // create function to init generic sprites
 
