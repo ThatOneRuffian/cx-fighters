@@ -7,6 +7,7 @@ func checkPlayerCollisionX (player1 Sprite, player2 Sprite, dX f32) (collision b
     var d2y f32
     
     var playerPadding f32 = (player1.width + player2.width)
+    
 	collision = false
 
     d1x = spriteLeft(player2) - spriteRight(player1)

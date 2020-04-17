@@ -1,10 +1,13 @@
 package main
 
+
+
 func (pl *Sprite) PlayerInit(_health i32, _speed i32, _name str){  // setup player attributes 
 	pl.health = _health
 	pl.speed = _speed
 	pl.name = _name
 }
+
 
 func (pl *Sprite) print(){  // wrapper for printing player's details 
 	str.print(pl.name)
@@ -18,16 +21,16 @@ func (pl *Sprite) TakeDamage(damage i32){
 
 func (pl *Sprite) jump(){
 	var jumpVelocity f32 = 7.0
-	if(pl.jumping && pl.jumpCount < 2000){
+	if(pl.jumping && pl.jumpCount < 2500){
 		pl.velocity.y = jumpVelocity
 		pl.jumpCount = pl.jumpCount + 1
-	}else if(pl.position.y  > gameFloor){ 
+	}else if(pl.position.y  > gameFloor + (600.0/2.0)/i32.f32(gameWindow.Height)){ 
 		pl.velocity.y = -jumpVelocity
 		pl.jumping = false
 
 	}else{
 		pl.velocity.y = 0.0
-		pl.position.y = gameFloor
+		pl.position.y = gameFloor + (600.0/2.0)/i32.f32(gameWindow.Height)
 		pl.jumpCount = 0
 	}
 }

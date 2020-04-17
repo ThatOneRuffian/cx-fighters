@@ -34,9 +34,25 @@ func gameLoop()() {
     str.print("Game Exiting")
 }
 
+func initSprites() {
+    background = createBackgroundSprite()
+
+    player1  = createPlayerSprite(1)
+    player2 = createPlayerSprite(2)
+    
+    yarnBall = createYarnBallSprite()
+
+	initGround(cobbleStone)
+    //initBricks()
+}
+
 func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
 
-	playerSprite.position.y = gameFloor   
+	var playerHeight f32 = 500.0 
+	var playerWidth f32 = 240.0
+	var scalMul f32 = 1.0
+
+	playerSprite.position.y = gameFloor + (playerHeight/2.0)/i32.f32(gameWindow.Height)
 	
 	if (playerNumber == 1){						// spawn location
 		playerSprite.position.x = player1SpawnX
@@ -49,37 +65,31 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
 		playerSprite.direction = 1
 	}
 	
+	playerSprite.velocity.y = 0.0
+	playerSprite.velocity.x = 0.0
     playerSprite.acceleration = 1.0
     playerSprite.maxVelocity = 1.25
     playerSprite.jumping = false
 	playerSprite.jumpCount = 0
     
-    playerSprite.width = 200.0 / i32.f32(gameWindow.Width)   // find image width automatically 
-    playerSprite.height = 210.0 / i32.f32(gameWindow.Height)
+    playerSprite.width = scalMul*playerWidth / i32.f32(gameWindow.Width)   // find image width automatically 
+    playerSprite.height = scalMul*playerHeight / i32.f32(gameWindow.Height)
 
     playerSprite.frames = append(playerSprite.frames, getTexture("textures/synth_cat.png"))
 }
 
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
-	inputs.updatePlayer(&player1)
+	inputs.updatePlayer1(&player1)
+	inputs.updatePlayer2(&player2)
+
 	player1.jump()
+	player2.jump()
 }
 
 func updateSprites(){
 	updateSpritePosition(&player1)
-}
-
-func initSprites() {
-    background = createBackgroundSprite()
-
-    player1  = createPlayerSprite(1)
-    player2 = createPlayerSprite(2)
-    
-    yarnBall = createYarnBallSprite()
-
-	initGround(cobbleStone)
-    //initBricks()
+	updateSpritePosition(&player2)
 }
 
 func renderSprites(){

@@ -57,7 +57,7 @@ func updateWindow(gameWindow *Window){
 	}
 }
 
-func updatePlayer (player *Sprite){
+func updatePlayer1 (player *Sprite){
     if rightPressed == true {
         player.velocity.x = player.maxVelocity
     } 
@@ -69,6 +69,22 @@ func updatePlayer (player *Sprite){
     }
     if spacePressed == true {
 		player.jumping = true
+    }
+    player.lastPosition = player.position
+}
+
+func updatePlayer2 (player *Sprite){
+    if rightPressed == true {
+        //player.velocity.x = player.maxVelocity
+    } 
+    if leftPressed == true {
+        //player.velocity.x = -1.0*player.maxVelocity
+    } 
+    if rightPressed == false && leftPressed == false {
+        //player.velocity.x = 0.0
+    }
+    if spacePressed == true {
+		//player.jumping = true
     }
     player.lastPosition = player.position
 }

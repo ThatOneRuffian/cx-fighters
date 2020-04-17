@@ -92,10 +92,10 @@ func draw(xCoord f32, yCoord f32, width f32, height f32, texture i32, direction 
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
     gl.Translatef(xCoord, yCoord, 0.0)
-    gl.Rotatef(0.0, 0.0, 0.0, 1.0) // I'm not sure what this does...
+    //gl.Rotatef(0.0, 0.0, 0.0, 1.0) // I'm not sure what this does...
     gl.BindTexture(gl.TEXTURE_2D, texture)
     
-    if ( direction == -1 || direction == 1){          			  //sprite flipping
+    if ( direction == -1 || direction == 1){          			  // sprite flipping filter all other possible values
 		gl.Scalef(i32.f32(direction)*width/2.0, height/2.0, 0.0)  // flip sprite
 	} else{
 		gl.Scalef(width/2.0, height/2.0, 0.0) 					  // no flip bit detected 
