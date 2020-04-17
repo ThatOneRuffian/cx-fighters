@@ -17,7 +17,7 @@ var downPressed bool
 var leftPressed bool
 var rightPressed bool
 var escapePressed bool
-var spacePressed bool
+var upPressed bool
 
 
 
@@ -61,18 +61,18 @@ func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) 
 		dPressed = false
     }
     // Player 1 Attack
-    if key == KEYCODE_D  && action == 1 {
-		dPressed = true
-	} else if key == KEYCODE_D  && action == 0 {
-		dPressed = false
+    if key == KEYCODE_S  && action == 1 {
+		sPressed = true
+	} else if key == KEYCODE_S  && action == 0 {
+		sPressed = false
     }
     
     // ============ Player 2 Controls ============ 
     // Player 2 Jump
     if key == KEYCODE_UP && action == 1 {
-		spacePressed = true
+		upPressed = true
 	} else if key == KEYCODE_UP && action == 0 {
-		spacePressed = false
+		upPressed = false
     }
     
     // Player 2 Left
@@ -88,6 +88,12 @@ func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) 
 	} else if key == KEYCODE_RIGHT  && action == 0 {
 		rightPressed = false
     }
+	// Player 2 Attack
+    if key == KEYCODE_DOWN  && action == 1 {
+		downPressed = true
+	} else if key == KEYCODE_DOWN  && action == 0 {
+		downPressed = false
+    }
     
 }
 
@@ -97,36 +103,42 @@ func updateWindow(gameWindow *Window){
 	}
 }
 
-func updatePlayer1 (player2 *Sprite){
+func updatePlayer1 (player1 *Sprite){
     if dPressed == true {
-        player2.velocity.x = player2.maxVelocity
+        player1.velocity.x = player1.maxVelocity
     } 
     if aPressed == true {
-        player2.velocity.x = -1.0*player2.maxVelocity
+        player1.velocity.x = -1.0*player1.maxVelocity
     } 
     if dPressed == false && aPressed == false {
-        player2.velocity.x = 0.0
+        player1.velocity.x = 0.0
     }
     if wPressed == true {
-		player2.jumping = true
+		player1.jumping = true
     }
-    player2.lastPosition = player2.position
+    if sPressed == true {
+		player1.health = player1.health - 0.01
+    }
+    player1.lastPosition = player1.position
 }
 
 
-func updatePlayer2 (player *Sprite){
+func updatePlayer2 (player2 *Sprite){
     if rightPressed == true {
-        player.velocity.x = player.maxVelocity
+        player2.velocity.x = player2.maxVelocity
     } 
     if leftPressed == true {
-        player.velocity.x = -1.0*player.maxVelocity
+        player2.velocity.x = -1.0*player2.maxVelocity
     } 
     if rightPressed == false && leftPressed == false {
-        player.velocity.x = 0.0
+        player2.velocity.x = 0.0
     }
-    if spacePressed == true {
-		player.jumping = true
+    if upPressed == true {
+		player2.jumping = true
     }
-    player.lastPosition = player.position
+    if downPressed == true {
+		player2.health = player2.health - 0.01
+    }
+    player2.lastPosition = player2.position
 }
 

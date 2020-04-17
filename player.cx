@@ -15,8 +15,8 @@ func (pl *Sprite) print(){  // wrapper for printing player's details
 	f32.print(pl.health)
 }
 
-func (pl *Sprite) TakeDamage(damage f32){
-	pl.health = pl.health - damage         // Take damage
+func (pl **Sprite) TakeDamage(damage f32) (newHealth f32){
+	newHealth = pl.health - damage         // Take damage
 }
 
 func (pl *Sprite) jump(){
