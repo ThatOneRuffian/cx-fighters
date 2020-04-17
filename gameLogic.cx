@@ -54,7 +54,7 @@ func initSprites() {
 
 	synthCat.jumping = false
 	synthCat.jumpCount = 0
-	initGround()
+	initGround(cobbleStone)
     //initBricks()
 }
 
@@ -63,7 +63,7 @@ func renderSprites(){
     drawSprite(synthCat)
     drawSprites(gameFloors)
     //drawSprite(yarnBall)
-    // render array of sprites
+    //render array of sprites
     //drawSprites(bricks)
 
 }
