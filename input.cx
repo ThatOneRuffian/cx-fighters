@@ -4,7 +4,14 @@ import "glfw"
 import "main"
 import "window"
 
+
 //player 1 controls
+var wPressed bool
+var aPressed bool
+var sPressed bool
+var dPressed bool
+
+//player 2 controls
 var upPressed bool
 var downPressed bool
 var leftPressed bool
@@ -13,11 +20,6 @@ var escapePressed bool
 var spacePressed bool
 
 
-//player 2 controls
-var wPressed bool
-var aPressed bool
-var sPressed bool
-var dPressed bool
 
 func SetupCallbacks () {
     glfw.SetKeyCallback("window", "keyEventCallback")
@@ -53,6 +55,12 @@ func keyEventCallback (window str, key i32, scancode i32, action i32, mods i32) 
     }
 
     // Player 1 Right
+    if key == KEYCODE_D  && action == 1 {
+		dPressed = true
+	} else if key == KEYCODE_D  && action == 0 {
+		dPressed = false
+    }
+    // Player 1 Attack
     if key == KEYCODE_D  && action == 1 {
 		dPressed = true
 	} else if key == KEYCODE_D  && action == 0 {
