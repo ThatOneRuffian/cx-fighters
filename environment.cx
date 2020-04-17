@@ -19,7 +19,7 @@ func createFloorSprite(position Vector2D, floorName str)(floor Sprite) {
 func initGround(floorName str) {
     var startPos Vector2D
     var increment f32
-    increment = 50.0 / i32.f32(gameWindow.Width)
+    increment = 100.0 / i32.f32(gameWindow.Width)
     startPos.x = -1.1         // start rendering just left of screen to cover gap
     startPos.y = gameFloor + 50.0/i32.f32(gameWindow.Width)
 
