@@ -9,6 +9,7 @@ type Window struct {
     Width i32
     Name str
     Running bool
+    Paused bool
 }
 
 func startWindow(window Window){

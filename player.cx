@@ -20,8 +20,8 @@ func (pl *Sprite) TakeDamage(damage i32){
 }
 
 func (pl *Sprite) jump(){
-	var jumpVelocity f32 = 7.0
-	if(pl.jumping && pl.jumpCount < 2500){
+	var jumpVelocity f32 = 6.0
+	if(pl.jumping && pl.jumpCount < 3000){
 		pl.velocity.y = jumpVelocity
 		pl.jumpCount = pl.jumpCount + 1
 	}else if(pl.position.y  > gameFloor + (600.0/2.0)/i32.f32(gameWindow.Height)){ 
