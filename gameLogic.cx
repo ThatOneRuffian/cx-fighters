@@ -6,7 +6,11 @@ import "inputs"
 // game sprites
 var background Sprite 
 var player1 Sprite
+var player1HpBar Sprite
+
 var player2 Sprite
+var player2HpBar Sprite
+var clock Sprite
 
 var yarnBall Sprite
 var bricks []Sprite
@@ -39,11 +43,70 @@ func initSprites() {
 
     player1  = createPlayerSprite(1)
     player2 = createPlayerSprite(2)
+    player1HpBar = createPlayerHpBar(1)
+    player2HpBar = createPlayerHpBar(2)
+
+    clock = createClockSprite()
     
     yarnBall = createYarnBallSprite()
 
 	initGround(cobbleStone)
     //initBricks()
+}
+
+func renderSprites(){
+	drawSprite(background)
+    drawSprite(player1)
+    drawSprite(player2)
+    drawSprite(clock)
+    drawSprite(player1HpBar)
+    drawSprite(player2HpBar)
+    drawSprites(gameFloors)
+    
+    //drawSprite(yarnBall)
+    //render array of sprites
+    //drawSprites(bricks)
+
+}
+
+func createPlayerHpBar(playerNumber i32)(hp Sprite){
+
+	var playerHeight f32 = 300.0 
+	var playerWidth f32 = 1200.0
+	var scalMul f32 = 1.0
+
+	hp.position.y = clockHeight
+	
+	if (playerNumber == 1){
+		hp.direction = 1
+		hp.position.x = -hpBarOffset
+	} else{
+		hp.direction = -1
+		hp.position.x = hpBarOffset
+	}
+    hp.width = scalMul*playerWidth / i32.f32(gameWindow.Width)   // find image width automatically 
+    hp.height = scalMul*playerHeight / i32.f32(gameWindow.Height)
+
+    hp.frames = append(hp.frames, getTexture("textures/hp_bar.png"))
+
+}
+
+func createClockSprite()(clock Sprite){
+
+	var playerHeight f32 = 300.0 
+	var playerWidth f32 = 300.0
+	var scalMul f32 = 1.0
+
+	clock.position.y = clockHeight
+	
+	clock.position.x = 0.0
+
+
+    clock.width = scalMul*playerWidth / i32.f32(gameWindow.Width)   // find image width automatically 
+    clock.height = scalMul*playerHeight / i32.f32(gameWindow.Height)
+
+    clock.frames = append(clock.frames, getTexture("textures/clock.png"))
+
 }
 
 func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
@@ -89,18 +152,6 @@ func updateActions(){
 func updateSprites(){
 	updatePlayer1Position(&player1)
 	updatePlayer2Position(&player2)
-}
-
-func renderSprites(){
-	drawSprite(background)
-    drawSprite(player1)
-    drawSprite(player2)
-    drawSprites(gameFloors)
-    
-    //drawSprite(yarnBall)
-    //render array of sprites
-    //drawSprites(bricks)
-
 }
 
 func updateGameTimers() {
