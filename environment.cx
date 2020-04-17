@@ -1,9 +1,12 @@
 package main
 
 var gameFloors []Sprite
+var player1HpBarStatus []Sprite
 
 var cobbleStone str = "textures/cobblestone.png"
 var floorHeight f32 = 100.0/i32.f32(gameWindow.Height)
+
+var HpBarStatus str = "./textures/hp_bar_slice.png"
 
 func createFloorSprite(position Vector2D, floorName str)(floor Sprite) {
     var groundSpriteWidth f32 = 100.0 
@@ -29,4 +32,28 @@ func initGround(floorName str) {
     }
 }
 
+func createHpBarSprite(position Vector2D, HpTexture str)(HpBar Sprite) {
+    var groundSpriteWidth f32 = 11.0 
+    var groundSpriteHeight f32 = 100.0 
+    
+    HpBar.position = position    
+    HpBar.width = groundSpriteWidth / i32.f32(gameWindow.Width)
+    HpBar.height = groundSpriteHeight / i32.f32(gameWindow.Height)
 
+    HpBar.frames = append(HpBar.frames, getTexture(HpTexture))
+}
+
+func initHpBar(floorName str) {
+    var startPos Vector2D
+    var increment f32
+    var barCount i32
+    
+    increment = 10.0 / i32.f32(gameWindow.Width)
+    startPos.x = hpBarStatusOffsetX - increment
+    startPos.y = hpBarStatusOffsetY    
+
+    for i:=0; startPos.x<hpBarStatusEndX; i=i+1 {    // render sprite along bottom boarder
+        startPos.x = startPos.x + increment
+        player1HpBarStatus = append(player1HpBarStatus, createHpBarSprite(startPos, floorName))
+    }
+}

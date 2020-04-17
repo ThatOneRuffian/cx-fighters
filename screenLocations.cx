@@ -6,3 +6,6 @@ var player1SpawnX f32= -0.5
 var player2SpawnX f32 = 0.5
 var clockHeight f32 = 0.80
 var hpBarOffset f32 = 0.6
+var hpBarStatusOffsetY f32 = 0.85
+var hpBarStatusOffsetX f32 = -0.755
+var hpBarStatusEndX f32 = -0.3

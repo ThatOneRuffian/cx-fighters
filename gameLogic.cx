@@ -51,6 +51,7 @@ func initSprites() {
     yarnBall = createYarnBallSprite()
 
 	initGround(cobbleStone)
+	initHpBar(HpBarStatus)
     //initBricks()
 }
 
@@ -59,6 +60,7 @@ func renderSprites(){
     drawSprite(player1)
     drawSprite(player2)
     drawSprite(clock)
+    drawSprites(player1HpBarStatus)
     drawSprite(player1HpBar)
     drawSprite(player2HpBar)
     drawSprites(gameFloors)
@@ -70,6 +72,11 @@ func renderSprites(){
 }
 
 func createPlayerHpBar(playerNumber i32)(hp Sprite){
+	var hpSliceLocation Vector2D 
+	hpSliceLocation.x = hpBarStatusOffsetX
+	hpSliceLocation.y = hpBarStatusOffsetY
+
+	//player1HpBarStatus = createHpBarSprite(HpBarStatus, hpSliceFile)
 
 	var playerHeight f32 = 300.0 
 	var playerWidth f32 = 1200.0
@@ -134,6 +141,7 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
     playerSprite.maxVelocity = 1.25
     playerSprite.jumping = false
 	playerSprite.jumpCount = 0
+	playerSprite.health = 100.0
     
     playerSprite.width = scalMul*playerWidth / i32.f32(gameWindow.Width)   // find image width automatically 
     playerSprite.height = scalMul*playerHeight / i32.f32(gameWindow.Height)

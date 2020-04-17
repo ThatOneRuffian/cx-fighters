@@ -18,7 +18,7 @@ type Sprite struct {
     frames []i32
     brickHit bool
     currentFrame i32
-    health i32
+    health f32
 	speed i32		// speed of character
 	name str		// name of character
 	jumping bool	// track if the character is jumping
