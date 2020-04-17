@@ -1,15 +1,23 @@
 package main
 
 func checkPlayerCollisionX (player1 Sprite, player2 Sprite, dX f32) (collision bool){
-	var d1x f32
+    var d1x f32
     var d2x f32
+    var d1y f32
+    var d2y f32
+    
+    var playerPadding f32 = (player1.width + player2.width)
+	collision = false
 
     d1x = spriteLeft(player2) - spriteRight(player1)
-	//d2x = spriteLeft(player1) - spriteRight(player2) + dX
+	//d2x = spriteLeft(player1) - spriteRight(player2) + dX  // other x componet?
 	
-	collision = false
+	d1y = spriteBottom(player2) - spriteTop(player1)
+	d2y = spriteBottom(player1) - spriteTop(player2)
 	
-	if (d1x - dX <= 0.0 ){
+	if (d1y > 0.0 || d2y > 0.0 || d1x - dX < -playerPadding){ // if sprites are not on the same height then no collision 
+		collision = false	
+	}else if (d1x - dX <= 0.0 ){ // if x edges touch then collision
 		collision = true
 	}
 	
