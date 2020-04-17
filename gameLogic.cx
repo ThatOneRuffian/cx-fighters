@@ -55,7 +55,7 @@ func initSprites() {
 	synthCat.jumping = false
 	synthCat.jumpCount = 0
 	initGround()
-    initBricks()
+    //initBricks()
 }
 
 func renderSprites(){
