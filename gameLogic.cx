@@ -3,10 +3,14 @@ package main
 import "glfw"
 import "inputs"
 
-var background Sprite // game sprites
+// game sprites
+var background Sprite 
 var player1 Sprite
+var player2 Sprite
+
 var yarnBall Sprite
 var bricks []Sprite
+
 
 func gameLoop()() {
     var program i32 = gl.CreateProgram() // create program object to apply shaders and 
@@ -30,6 +34,29 @@ func gameLoop()() {
     str.print("Game Exiting")
 }
 
+func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
+
+	playerSprite.position.y = gameFloor   
+	
+	if (playerNumber == 1){
+		playerSprite.position.x = player1SpawnX
+	} else if (playerNumber == 2){
+		playerSprite.position.x = player2SpawnX
+	} else{
+		playerSprite.position.x = 0.0
+	}
+	
+    playerSprite.acceleration = 1.0
+    playerSprite.maxVelocity = 1.25
+    playerSprite.jumping = false
+	playerSprite.jumpCount = 0
+    
+    playerSprite.width = 200.0 / 1024.0
+    playerSprite.height = 200.0 / 768.0
+
+    playerSprite.frames = append(playerSprite.frames, getTexture("textures/synth_cat.png"))
+}
+
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
 	inputs.updatePlayer(&player1)
@@ -43,14 +70,11 @@ func updateSprites(){
 func initSprites() {
     background = createBackgroundSprite()
 
-    player1  = createSynthCatSprite()
-    
+    player1  = createPlayerSprite(1)
+    player2 = createPlayerSprite(2)
     
     yarnBall = createYarnBallSprite()
 
-
-	player1.jumping = false
-	player1.jumpCount = 0
 	initGround(cobbleStone)
     //initBricks()
 }
@@ -58,7 +82,9 @@ func initSprites() {
 func renderSprites(){
 	drawSprite(background)
     drawSprite(player1)
+    drawSprite(player2)
     drawSprites(gameFloors)
+    
     //drawSprite(yarnBall)
     //render array of sprites
     //drawSprites(bricks)
@@ -154,14 +180,4 @@ func createBackgroundSprite()(background Sprite) {
     background.frames = append(background.frames, getTexture("textures/background.png"))
 }
 
-func createSynthCatSprite()(player1 Sprite) {
-	player1.position.y = gameFloor   
-    player1.position.x = player1SpawnX
-    player1.acceleration = 1.0
-    player1.maxVelocity = 1.25
-    
-    player1.width = 200.0 / 1024.0
-    player1.height = 200.0 / 768.0
 
-    player1.frames = append(player1.frames, getTexture("textures/synth_cat.png"))
-}
