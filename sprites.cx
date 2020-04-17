@@ -115,14 +115,25 @@ func drawSprite(sprite Sprite) {
     height = sprite.height
     x = sprite.position.x
     y = sprite.position.y
-    
-    if animationLimiter.limitReached {
-        if sprite.currentFrame < len(sprite.frames) - 1 {
-            sprite.currentFrame = sprite.currentFrame + 1
-        } else {
-            sprite.currentFrame = 0
-        }
-    }
+
+    frame = sprite.frames[sprite.currentFrame]
+
+    draw(x, y, width, height, frame, sprite.direction)
+}
+
+func drawSpriteFrame(sprite Sprite, frameIndex i32) {   // render a frame with provided index
+    var width f32
+    var height f32
+    var frame i32
+	var x f32
+	var y f32
+
+    width = sprite.width
+    height = sprite.height
+    x = sprite.position.x
+    y = sprite.position.y
+
+	sprite.currentFrame = frameIndex
 
     frame = sprite.frames[sprite.currentFrame]
 

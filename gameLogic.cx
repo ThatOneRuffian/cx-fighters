@@ -60,7 +60,7 @@ func initSprites() {
 
 func renderSprites(){
 	drawSprite(background)
-    drawSprite(player1)
+    drawSpriteFrame(player1, PLAYER_ATTACK)
     drawSprite(player2)
     drawSprite(clock)
     drawPlayer1Hp(player1HpBarStatus)
@@ -149,6 +149,8 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
     playerSprite.height = scalMul*playerHeight / i32.f32(gameWindow.Height)
 
     playerSprite.frames = append(playerSprite.frames, getTexture("textures/synth_cat.png"))
+	playerSprite.frames = append(playerSprite.frames, getTexture("textures/synth_cat2.png"))
+
 }
 
 func updateActions(){

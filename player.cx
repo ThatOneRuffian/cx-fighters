@@ -1,5 +1,9 @@
 package main
 
+// constants
+
+var PLAYER_REST i32 = 0
+var PLAYER_ATTACK i32 = 1
 
 
 func (pl *Sprite) PlayerInit(_health f32, _speed i32, _name str){  // setup player attributes 
