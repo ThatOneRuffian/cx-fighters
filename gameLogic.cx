@@ -60,7 +60,7 @@ func renderSprites(){
     drawSprite(player1)
     drawSprite(player2)
     drawSprite(clock)
-    drawSprites(player1HpBarStatus)
+    drawPlayer1Hp(player1HpBarStatus)
     drawSprite(player1HpBar)
     drawSprite(player2HpBar)
     drawSprites(gameFloors)
@@ -141,7 +141,7 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
     playerSprite.maxVelocity = 1.25
     playerSprite.jumping = false
 	playerSprite.jumpCount = 0
-	playerSprite.health = 100.0
+	playerSprite.health = 5.0
     
     playerSprite.width = scalMul*playerWidth / i32.f32(gameWindow.Width)   // find image width automatically 
     playerSprite.height = scalMul*playerHeight / i32.f32(gameWindow.Height)
