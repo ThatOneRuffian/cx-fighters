@@ -20,7 +20,7 @@ func (pl *Sprite) jump(){
 	var jumpVelocity f32 = 7.0
 	if(pl.jumping && pl.jumpCount < 2000){
 		pl.velocity.y = jumpVelocity
-		pl.jumpCount = synthCat.jumpCount + 1
+		pl.jumpCount = pl.jumpCount + 1
 	}else if(pl.position.y  > gameFloor){ 
 		pl.velocity.y = -jumpVelocity
 		pl.jumping = false

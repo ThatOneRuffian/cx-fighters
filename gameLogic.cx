@@ -4,7 +4,7 @@ import "glfw"
 import "inputs"
 
 var background Sprite // game sprites
-var synthCat Sprite
+var player1 Sprite
 var yarnBall Sprite
 var bricks []Sprite
 
@@ -32,36 +32,32 @@ func gameLoop()() {
 
 func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
-	inputs.updatePlayer(&synthCat)
-	synthCat.jump()
+	inputs.updatePlayer(&player1)
+	player1.jump()
 }
 
 func updateSprites(){
-	updateSpritePosition(&synthCat)
+	updateSpritePosition(&player1)
 }
 
 func initSprites() {
     background = createBackgroundSprite()
 
-    synthCat  = createSynthCatSprite()
-    synthCat.position.y = gameFloor   
-    synthCat.position.x = player1SpawnX
+    player1  = createSynthCatSprite()
+    
     
     yarnBall = createYarnBallSprite()
-    yarnBall.position.x = 0.0
-    yarnBall.position.y = -0.8
-    yarnBall.velocity.y = 0.3
-    yarnBall.velocity.x = 0.6
 
-	synthCat.jumping = false
-	synthCat.jumpCount = 0
+
+	player1.jumping = false
+	player1.jumpCount = 0
 	initGround(cobbleStone)
     //initBricks()
 }
 
 func renderSprites(){
 	drawSprite(background)
-    drawSprite(synthCat)
+    drawSprite(player1)
     drawSprites(gameFloors)
     //drawSprite(yarnBall)
     //render array of sprites
@@ -114,9 +110,9 @@ func updateBall(ball Sprite)(out Sprite) {
         }
     }
 
-    if spriteTop(ball) > spriteBottom(synthCat) && spriteLastTop(ball) < spriteLastBottom(synthCat) {
-        if spriteRight(ball) >= spriteLeft(synthCat) && spriteLeft(ball) <= spriteRight(synthCat) {
-            ball.position.y = spriteBottom(synthCat) - ball.height / 2.0
+    if spriteTop(ball) > spriteBottom(player1) && spriteLastTop(ball) < spriteLastBottom(player1) {
+        if spriteRight(ball) >= spriteLeft(player1) && spriteLeft(ball) <= spriteRight(player1) {
+            ball.position.y = spriteBottom(player1) - ball.height / 2.0
             ball.velocity.y = ball.velocity.y*-1.0
         }
     }
@@ -132,6 +128,10 @@ func createYarnBallSprite()(yarnBall Sprite) {
     yarnBall.maxVelocity = 1.0
     yarnBall.width = 64.0 / 1024.0
     yarnBall.height = 64.0 / 768.0
+    yarnBall.position.x = 0.0
+    yarnBall.position.y = -0.8
+    yarnBall.velocity.y = 0.3
+    yarnBall.velocity.x = 0.6
 
     yarnBall.frames = append(yarnBall.frames, getTexture("textures/yarnBall0.png"))
     yarnBall.frames = append(yarnBall.frames, getTexture("textures/yarnBall1.png"))
@@ -154,11 +154,14 @@ func createBackgroundSprite()(background Sprite) {
     background.frames = append(background.frames, getTexture("textures/background.png"))
 }
 
-func createSynthCatSprite()(synthCat Sprite) {
-    synthCat.acceleration = 1.0
-    synthCat.maxVelocity = 1.25
-    synthCat.width = 200.0 / 1024.0
-    synthCat.height = 200.0 / 768.0
+func createSynthCatSprite()(player1 Sprite) {
+	player1.position.y = gameFloor   
+    player1.position.x = player1SpawnX
+    player1.acceleration = 1.0
+    player1.maxVelocity = 1.25
+    
+    player1.width = 200.0 / 1024.0
+    player1.height = 200.0 / 768.0
 
-    synthCat.frames = append(synthCat.frames, getTexture("textures/synth_cat.png"))
+    player1.frames = append(player1.frames, getTexture("textures/synth_cat.png"))
 }
