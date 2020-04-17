@@ -11,14 +11,14 @@ func checkPlayerCollisionX (player1 Sprite, player2 Sprite, dX f32) (collision b
 	collision = false
 
     d1x = spriteLeft(player2) - spriteRight(player1)
-	//d2x = spriteLeft(player1) - spriteRight(player2) + dX  // other x componet?
+	d2x = spriteLeft(player1) - spriteRight(player2)    
 	
 	d1y = spriteBottom(player2) - spriteTop(player1)
 	d2y = spriteBottom(player1) - spriteTop(player2)
 	
-	if (d1y > 0.0 || d2y > 0.0 || d1x - dX < -playerPadding){ // if sprites are not on the same height then no collision 
+	if (d1y > 0.0 || d2y > 0.0 || d1x - dX < -playerPadding){ // if sprites are not on the same height then no collision or out of range of object
 		collision = false	
-	}else if (d1x - dX <= 0.0 ){ // if x edges touch then collision
+	}else if (d1x - dX <= 0.0 || d2x + dX >= 0.0){ // if x edges touch then collision
 		collision = true
 	}
 	

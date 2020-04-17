@@ -82,14 +82,13 @@ func updateActions(){
 	window.updateWindow(&gameWindow) // parse player input meant for the current window 
 	inputs.updatePlayer1(&player1)
 	inputs.updatePlayer2(&player2)
-
 	player1.jump()
 	player2.jump()
 }
 
 func updateSprites(){
-	updateSpritePosition(&player1)
-	updateSpritePosition(&player2)
+	updatePlayer1Position(&player1)
+	updatePlayer2Position(&player2)
 }
 
 func renderSprites(){

@@ -32,13 +32,36 @@ func getTexture(textureFileName str)(texture i32) {
     texture = gl.NewTexture(str.concat(workingDirectory, textureFileName))
 }
 
-func updateSpritePosition(sprite *Sprite){
+func updatePlayer1Position(sprite *Sprite){
     // move deltas
     var dX f32 = f32.mul(sprite.velocity.x, f64.f32(loopTracker.deltaTime))
     var dY f32 = f32.mul(sprite.velocity.y, f64.f32(loopTracker.deltaTime))
-	
 	var windowCollisionX bool = checkWinCollisionX(sprite, dX)
 	var playerCollision bool = checkPlayerCollisionX(player1, player2, dX)
+	
+	if (dX > 0.0){
+		sprite.direction = 1
+	} else if (dX < 0.0){
+		sprite.direction = -1
+	}
+	
+	if (windowCollisionX){ // collision detection
+		dX = 0.0
+	}
+	if (playerCollision){
+		dX = 0.0
+	}	
+
+	sprite.position.x = sprite.position.x + dX
+	sprite.position.y = sprite.position.y + dY
+}
+
+func updatePlayer2Position(sprite *Sprite){
+    // move deltas
+    var dX f32 = f32.mul(sprite.velocity.x, f64.f32(loopTracker.deltaTime))
+    var dY f32 = f32.mul(sprite.velocity.y, f64.f32(loopTracker.deltaTime))
+	var windowCollisionX bool = checkWinCollisionX(sprite, dX)
+	var playerCollision bool = checkPlayerCollisionX(player2, player1, dX)
 	
 	if (dX > 0.0){
 		sprite.direction = 1
