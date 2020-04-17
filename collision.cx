@@ -1,5 +1,20 @@
 package main
 
+func checkPlayerCollisionX (player1 Sprite, player2 Sprite, dX f32) (collision bool){
+	var d1x f32
+    var d2x f32
+
+    d1x = spriteLeft(player2) - spriteRight(player1)
+	//d2x = spriteLeft(player1) - spriteRight(player2) + dX
+	
+	collision = false
+	
+	if (d1x - dX <= 0.0 ){
+		collision = true
+	}
+	
+}
+
 func checkCollision(spriteA Sprite, spriteB Sprite) (collision bool) {
     var d1x f32
     var d1y f32
@@ -30,6 +45,38 @@ func checkWinCollisionX(sprite *Sprite, delta f32)( collision bool){
 	} else{
 		collision = false
 	}
+}
+
+func spriteTop(sprite Sprite) (out f32) {
+    out = f32.add(sprite.position.y, f32.div(sprite.height, 2.0))
+}
+
+func spriteBottom(sprite Sprite)(out f32) {
+    out = f32.sub(sprite.position.y, f32.div(sprite.height, 2.0))
+}
+
+func spriteRight(sprite Sprite)(out f32) {
+    out = f32.add(sprite.position.x, f32.div(sprite.width, 2.0))
+}
+
+func spriteLeft(sprite Sprite)(out f32) {
+    out = f32.sub(sprite.position.x, f32.div(sprite.width, 2.0))
+}
+
+func spriteLastTop(sprite Sprite)(out f32) {
+    out = f32.add(sprite.lastPosition.y, f32.div(sprite.height, 2.0))
+}
+
+func spriteLastBottom(sprite Sprite)(out f32) {
+    out = f32.sub(sprite.lastPosition.y, f32.div(sprite.height, 2.0))
+}
+
+func spriteLastRight(sprite Sprite)(out f32) {
+    out = f32.add(sprite.lastPosition.x, f32.div(sprite.width, 2.0))
+}
+
+func spriteLastLeft(sprite Sprite)(out f32) {
+    out = f32.sub(sprite.lastPosition.x, f32.div(sprite.width, 2.0))
 }
 
 // ============== Old reference code ================

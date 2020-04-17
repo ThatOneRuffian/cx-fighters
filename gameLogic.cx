@@ -38,12 +38,15 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
 
 	playerSprite.position.y = gameFloor   
 	
-	if (playerNumber == 1){
+	if (playerNumber == 1){						// spawn location
 		playerSprite.position.x = player1SpawnX
+		playerSprite.direction = 1
 	} else if (playerNumber == 2){
 		playerSprite.position.x = player2SpawnX
+		playerSprite.direction = -1
 	} else{
-		playerSprite.position.x = 0.0
+		playerSprite.position.x = 0.0  // default values
+		playerSprite.direction = 1
 	}
 	
     playerSprite.acceleration = 1.0
@@ -51,8 +54,8 @@ func createPlayerSprite(playerNumber i32)(playerSprite Sprite) {
     playerSprite.jumping = false
 	playerSprite.jumpCount = 0
     
-    playerSprite.width = 200.0 / 1024.0
-    playerSprite.height = 200.0 / 768.0
+    playerSprite.width = 200.0 / i32.f32(gameWindow.Width)   // find image width automatically 
+    playerSprite.height = 210.0 / i32.f32(gameWindow.Height)
 
     playerSprite.frames = append(playerSprite.frames, getTexture("textures/synth_cat.png"))
 }
