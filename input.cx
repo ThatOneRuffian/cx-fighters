@@ -117,11 +117,10 @@ func updatePlayer1 (player1 *Sprite){
 		player1.jumping = true
     }
     if sPressed == true {
-		player1.health = player1.health - 0.01
+		player1.attacking = true
     }
     player1.lastPosition = player1.position
 }
-
 
 func updatePlayer2 (player2 *Sprite){
     if rightPressed == true {
@@ -137,7 +136,7 @@ func updatePlayer2 (player2 *Sprite){
 		player2.jumping = true
     }
     if downPressed == true {
-		player2.health = player2.health - 0.01
+		player2.attacking = true
     }
     player2.lastPosition = player2.position
 }

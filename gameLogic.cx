@@ -60,8 +60,8 @@ func initSprites() {
 
 func renderSprites(){
 	drawSprite(background)
-    drawSpriteFrame(player1, PLAYER_ATTACK)
-    drawSprite(player2)
+    drawPlayer(&player1)
+	drawPlayer(&player2)
     drawSprite(clock)
     drawPlayer1Hp(player1HpBarStatus)
     drawPlayer2Hp(player2HpBarStatus)
